@@ -2,17 +2,17 @@
 
 ## Objetivos da Aula
 
-- Entender o que e controle de versao e por que e essencial no desenvolvimento de software
+- Entender o que é controle de versão e por que é essencial no desenvolvimento de software
 - Instalar e configurar o Git
 - Aprender os comandos fundamentais do Git
-- Criar uma conta no GitHub e conectar com o repositorio local
+- Criar uma conta no GitHub e conectar com o repositório local
 - Fazer o primeiro commit e push
 
 ---
 
-## 1. O que e Controle de Versao?
+## 1. O que é Controle de Versão?
 
-Imagine que voce esta escrevendo um TCC. Voce salva versoes como:
+Imagine que você está escrevendo um TCC. Você salva versões como:
 
 ```
 tcc-final.docx
@@ -21,32 +21,34 @@ tcc-final-v2-corrigido.docx
 tcc-final-AGORA-VAI.docx
 ```
 
-Controle de versao resolve esse problema. O **Git** registra cada alteracao feita no codigo, permitindo:
+O controle de versão resolve esse problema. O **Git** registra cada alteração feita no código, permitindo:
 
-- Voltar a qualquer versao anterior
+- Voltar a qualquer versão anterior
 - Trabalhar em equipe sem sobrescrever o trabalho dos outros
-- Saber quem fez cada alteracao e quando
+- Saber quem fez cada alteração e quando
 
 ### Git vs GitHub
 
-| Git | GitHub |
-|-----|--------|
-| Ferramenta local instalada no seu computador | Plataforma online que hospeda repositorios Git |
-| Funciona offline | Requer internet |
-| Controla versoes dos arquivos | Facilita colaboracao, code review, issues |
+| Git                                          | GitHub                                         |
+| -------------------------------------------- | ---------------------------------------------- |
+| Ferramenta local instalada no seu computador | Plataforma online que hospeda repositórios Git |
+| Funciona offline                             | Requer internet                                |
+| Controla versões dos arquivos                | Facilita colaboração, code review e issues     |
 
 ---
 
-## 2. Instalacao e Configuracao
+## 2. Instalação e Configuração
 
 ### 2.1 Instalando o Git
 
 **Windows:**
+
 - Acesse https://git-scm.com/downloads e baixe o instalador
-- Durante a instalacao, mantenha as opcoes padrao
-- Marque a opcao "Git Bash Here" (util para terminal)
+- Durante a instalação, mantenha as opções padrão
+- Marque a opção "Git Bash Here" (útil para terminal)
 
 **macOS:**
+
 ```bash
 # Se tiver Homebrew:
 brew install git
@@ -56,28 +58,29 @@ xcode-select --install
 ```
 
 **Linux (Ubuntu/Debian):**
+
 ```bash
 sudo apt update
 sudo apt install git
 ```
 
-### 2.2 Verificando a instalacao
+### 2.2 Verificando a instalação
 
 ```bash
 git --version
 # Deve exibir algo como: git version 2.43.0
 ```
 
-### 2.3 Configuracao inicial
+### 2.3 Configuração inicial
 
-Essas configuracoes sao feitas **uma unica vez** e identificam voce nos commits:
+Essas configurações são feitas **uma única vez** e identificam você nos commits:
 
 ```bash
 git config --global user.name "Seu Nome"
 git config --global user.email "seu.email@exemplo.com"
 ```
 
-Para verificar as configuracoes:
+Para verificar as configurações:
 
 ```bash
 git config --list
@@ -87,70 +90,70 @@ git config --list
 
 ## 3. Conceitos Fundamentais
 
-### 3.1 Repositorio (repo)
+### 3.1 Repositório (repo)
 
-Um repositorio e uma pasta cujos arquivos sao rastreados pelo Git. Ao inicializar um repositorio, o Git cria uma pasta oculta `.git/` que armazena todo o historico.
+Um repositório é uma pasta cujos arquivos são rastreados pelo Git. Ao inicializar um repositório, o Git cria uma pasta oculta `.git/` que armazena todo o histórico.
 
-### 3.2 Os tres estados do Git
+### 3.2 Os três estados do Git
 
 ```
- Diretorio de Trabalho  -->  Staging Area  -->  Repositorio Local
+ Diretório de Trabalho  -->  Staging Area  -->  Repositório Local
    (Working Directory)       (git add)          (git commit)
 ```
 
-1. **Working Directory:** onde voce edita os arquivos normalmente
-2. **Staging Area (Index):** area de preparacao - voce escolhe quais alteracoes vao entrar no proximo commit
-3. **Repositorio (.git):** onde os commits ficam salvos permanentemente
+1. **Working Directory:** onde você edita os arquivos normalmente
+2. **Staging Area (Index):** área de preparação - você escolhe quais alterações vão entrar no próximo commit
+3. **Repositório (.git):** onde os commits ficam salvos permanentemente
 
-### 3.3 O que e um Commit?
+### 3.3 O que é um commit?
 
-Um commit e um "snapshot" (foto) do estado dos seus arquivos em um momento especifico. Cada commit tem:
+Um commit é um "snapshot" (foto) do estado dos seus arquivos em um momento específico. Cada commit tem:
 
-- Um identificador unico (hash SHA)
+- Um identificador único (hash SHA)
 - Uma mensagem descritiva
 - Autor e data
-- Referencia ao commit anterior
+- Referência ao commit anterior
 
 ---
 
-## 4. Passo a Passo - Primeiros Comandos
+## 4. Passo a passo - Primeiros Comandos
 
-### 4.1 Criando um repositorio local
+### 4.1 Criando um repositório local
 
 ```bash
 # Crie uma pasta para o projeto
 mkdir meu-primeiro-repo
 cd meu-primeiro-repo
 
-# Inicialize o repositorio Git
+# Inicialize o repositório Git
 git init
 ```
 
-Voce vera a mensagem: `Initialized empty Git repository in .../meu-primeiro-repo/.git/`
+Você verá a mensagem: `Initialized empty Git repository in .../meu-primeiro-repo/.git/`
 
 ### 4.2 Criando e rastreando arquivos
 
 ```bash
 # Crie um arquivo
-echo "# Meu Primeiro Repositorio" > README.md
+echo "# Meu Primeiro Repositório" > README.md
 
 # Verifique o status
 git status
 ```
 
-O `git status` mostrara o arquivo como **Untracked** (nao rastreado). Isso significa que o Git sabe que o arquivo existe, mas ainda nao o esta monitorando.
+O `git status` mostrará o arquivo como **Untracked** (não rastreado). Isso significa que o Git sabe que o arquivo existe, mas ainda não está monitorando esse arquivo.
 
-### 4.3 Adicionando ao Staging
+### 4.3 Adicionando ao staging
 
 ```bash
-# Adicionar um arquivo especifico
+# Adicionar um arquivo específico
 git add README.md
 
 # Ou adicionar todos os arquivos modificados
 git add .
 ```
 
-Agora o arquivo esta na **Staging Area**, pronto para ser commitado.
+Agora o arquivo está na **Staging Area**, pronto para ser commitado.
 
 ### 4.4 Fazendo o primeiro commit
 
@@ -160,13 +163,13 @@ git commit -m "Primeiro commit: adiciona README"
 
 A flag `-m` permite escrever a mensagem diretamente no comando.
 
-### 4.5 Verificando o historico
+### 4.5 Verificando o histórico
 
 ```bash
 git log
 ```
 
-Voce vera algo como:
+Você verá algo como:
 
 ```
 commit a1b2c3d4e5f6... (HEAD -> main)
@@ -181,45 +184,45 @@ Date:   Mon Mar 10 2026
 ```bash
 # Editar arquivos...
 git status          # Ver o que mudou
-git add .           # Preparar alteracoes
+git add .           # Preparar alterações
 git commit -m "mensagem descritiva"  # Salvar snapshot
-git log --oneline   # Ver historico resumido
+git log --oneline   # Ver histórico resumido
 ```
 
 ---
 
-## 5. GitHub - Repositorio Remoto
+## 5. GitHub - Repositório Remoto
 
 ### 5.1 Criando uma conta
 
 1. Acesse https://github.com
-2. Crie uma conta com seu email institucional (se possivel)
+2. Crie uma conta com seu email institucional (se possível)
 3. Confirme o email
 
-### 5.2 Criando um repositorio no GitHub
+### 5.2 Criando um repositório no GitHub
 
-1. Clique em **"New repository"** (botao verde)
-2. De um nome ao repositorio (ex: `meu-primeiro-repo`)
-3. **Nao** marque "Initialize this repository with a README" (ja temos um local)
+1. Clique em **"New repository"** (botão verde)
+2. Dê um nome ao repositório (ex: `meu-primeiro-repo`)
+3. **Não** marque "Initialize this repository with a README" (já temos um local)
 4. Clique em **"Create repository"**
 
-### 5.3 Conectando local ao remoto
+### 5.3 Conectando o local ao remoto
 
-O GitHub mostrara os comandos. Copie e execute:
+O GitHub mostrará os comandos. Copie e execute:
 
 ```bash
-# Adicionar o endereco do repositorio remoto
+# Adicionar o endereço do repositório remoto
 git remote add origin https://github.com/seu-usuario/meu-primeiro-repo.git
 
 # Enviar os commits locais para o GitHub
 git push -u origin main
 ```
 
-> **Nota:** Na primeira vez, o Git pedira autenticacao. Recomenda-se configurar um **Personal Access Token** ou **SSH Key**.
+> **Nota:** Na primeira vez, o Git pedirá autenticação. Recomenda-se configurar um **Personal Access Token** ou **SSH Key**.
 
-### 5.4 Clonando um repositorio existente
+### 5.4 Clonando um repositório existente
 
-Para baixar um repositorio que ja existe no GitHub:
+Para baixar um repositório que já existe no GitHub:
 
 ```bash
 git clone https://github.com/usuario/nome-do-repo.git
@@ -227,11 +230,12 @@ git clone https://github.com/usuario/nome-do-repo.git
 
 ---
 
-## 6. Boas Praticas de Commit
+## 6. Boas Práticas de Commit
 
 ### Mensagens de commit
 
 **Ruim:**
+
 ```
 git commit -m "alteracoes"
 git commit -m "fix"
@@ -239,48 +243,49 @@ git commit -m "atualizacao"
 ```
 
 **Bom:**
+
 ```
 git commit -m "Adiciona validacao de email no formulario de cadastro"
 git commit -m "Corrige calculo de desconto para valores acima de 100"
 git commit -m "Remove funcao duplicada de formatacao de data"
 ```
 
-### Regras praticas
+### Regras práticas
 
-1. Use o imperativo: "Adiciona", "Corrige", "Remove" (nao "Adicionei", "Corrigido")
-2. Seja especifico: diga **o que** e **onde**
+1. Use o imperativo: "Adiciona", "Corrige", "Remove" (não "Adicionei", "Corrigido")
+2. Seja específico: diga **o que** e **onde**
 3. Commits pequenos e frequentes > commits gigantes e raros
 
 ---
 
 ## 7. Comandos Essenciais - Resumo
 
-| Comando | O que faz |
-|---------|-----------|
-| `git init` | Inicializa um repositorio |
-| `git status` | Mostra o estado atual dos arquivos |
-| `git add <arquivo>` | Adiciona arquivo ao staging |
-| `git add .` | Adiciona todos os arquivos modificados |
-| `git commit -m "msg"` | Cria um commit com mensagem |
-| `git log` | Mostra historico de commits |
-| `git log --oneline` | Historico resumido (uma linha por commit) |
-| `git remote add origin <url>` | Conecta a um repositorio remoto |
-| `git push` | Envia commits para o remoto |
-| `git pull` | Baixa atualizacoes do remoto |
-| `git clone <url>` | Clona um repositorio existente |
-| `git diff` | Mostra alteracoes nao commitadas |
+| Comando                       | O que faz                                 |
+| ----------------------------- | ----------------------------------------- |
+| `git init`                    | Inicializa um repositório                 |
+| `git status`                  | Mostra o estado atual dos arquivos        |
+| `git add <arquivo>`           | Adiciona arquivo ao staging               |
+| `git add .`                   | Adiciona todos os arquivos modificados    |
+| `git commit -m "msg"`         | Cria um commit com mensagem               |
+| `git log`                     | Mostra histórico de commits               |
+| `git log --oneline`           | Histórico resumido (uma linha por commit) |
+| `git remote add origin <url>` | Conecta a um repositório remoto           |
+| `git push`                    | Envia commits para o remoto               |
+| `git pull`                    | Baixa atualizações do remoto              |
+| `git clone <url>`             | Clona um repositório existente            |
+| `git diff`                    | Mostra alterações não commitadas          |
 
 ---
 
 ## 8. .gitignore
 
-O arquivo `.gitignore` diz ao Git quais arquivos **nao** devem ser rastreados:
+O arquivo `.gitignore` diz ao Git quais arquivos **não** devem ser rastreados:
 
 ```gitignore
-# Dependencias do Node
+# Dependências do Node
 node_modules/
 
-# Variaveis de ambiente
+# Variáveis de ambiente
 .env
 
 # Arquivos de build
@@ -295,24 +300,27 @@ Crie este arquivo na raiz do projeto **antes** de adicionar os arquivos ao Git.
 
 ---
 
-## Exercicios Praticos
+## Exercícios Práticos
 
-### Exercicio 1 - Repositorio pessoal
+### Exercício 1 - Repositório pessoal
+
 1. Crie uma pasta chamada `exercicios-git`
-2. Inicialize um repositorio Git
+2. Inicialize um repositório Git
 3. Crie um arquivo `sobre-mim.txt` com seu nome e curso
-4. Faca o commit
-5. Crie um repositorio no GitHub e faca o push
+4. Faça o commit
+5. Crie um repositório no GitHub e faça o push
 
-### Exercicio 2 - Multiplos commits
-1. No mesmo repositorio, crie um arquivo `linguagens.txt`
-2. Adicione 3 linguagens que voce conhece, fazendo **um commit por linguagem**
-3. Use `git log --oneline` para ver o historico
+### Exercício 2 - Múltiplos commits
 
-### Exercicio 3 - .gitignore
-1. Crie um arquivo `segredo.txt` com uma senha ficticia
+1. No mesmo repositório, crie um arquivo `linguagens.txt`
+2. Adicione 3 linguagens que você conhece, fazendo **um commit por linguagem**
+3. Use `git log --oneline` para ver o histórico
+
+### Exercício 3 - .gitignore
+
+1. Crie um arquivo `segredo.txt` com uma senha fictícia
 2. Crie um `.gitignore` que ignore esse arquivo
-3. Faca `git status` e confirme que o arquivo nao aparece
+3. Faça `git status` e confirme que o arquivo não aparece
 4. Commit e push
 
 ---
@@ -321,9 +329,9 @@ Crie este arquivo na raiz do projeto **antes** de adicionar os arquivos ao Git.
 
 O **GitHub Copilot Chat** no VS Code pode te ajudar com Git. Experimente perguntar:
 
-- *"Como desfaco o ultimo commit sem perder as alteracoes?"*
-- *"Qual a diferenca entre git merge e git rebase?"*
-- *"Me explique o que esse comando faz: git reset --soft HEAD~1"*
+- _"Como desfaço o último commit sem perder as alterações?"_
+- _"Qual a diferença entre git merge e git rebase?"_
+- _"Me explique o que esse comando faz: git reset --soft HEAD~1"_
 
 > **Importante:** Use a IA como ferramenta de aprendizado. Entenda o que cada comando faz antes de executar, especialmente comandos destrutivos como `reset` e `force push`.
 
@@ -331,5 +339,5 @@ O **GitHub Copilot Chat** no VS Code pode te ajudar com Git. Experimente pergunt
 
 ## Leitura Complementar
 
-- [Git - Documentacao Oficial](https://git-scm.com/doc)
+- [Git - Documentação Oficial](https://git-scm.com/doc)
 - [GitHub Docs - Quickstart](https://docs.github.com/en/get-started/quickstart)
