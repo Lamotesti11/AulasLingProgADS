@@ -3,8 +3,8 @@
 ## Objetivos da Aula
 
 - Utilizar estruturas condicionais: if/else, else if, switch
-- Implementar lacos de repeticao: for, while, do-while
-- Combinar condicionais e lacos para resolver problemas
+- Implementar laços de repetição: for, while, do-while
+- Combinar condicionais e laços para resolver problemas
 - Conhecer o for...of e for...in
 
 ---
@@ -23,7 +23,7 @@ if (nota >= 6) {
 }
 ```
 
-> **Comparando com C:** A sintaxe e identica. A unica diferenca e que em TypeScript a variavel tem tipo anotado.
+> **Comparando com C:** A sintaxe é idêntica. A única diferença é que em TypeScript a variável tem tipo anotado.
 
 ### 1.2 else if
 
@@ -41,9 +41,9 @@ if (nota >= 9) {
 }
 ```
 
-### 1.3 Operador ternario (revisao)
+### 1.3 Operador ternário (revisão)
 
-Para condicoes simples, o ternario e mais conciso:
+Para condições simples, o ternário é mais conciso:
 
 ```typescript
 const idade: number = 17;
@@ -52,7 +52,7 @@ const categoria: string = idade >= 18 ? "adulto" : "menor";
 
 ### 1.4 switch
 
-Ideal quando ha muitas comparacoes com um mesmo valor:
+Ideal quando há muitas comparações com um mesmo valor:
 
 ```typescript
 const diaSemana: number = 3;
@@ -62,7 +62,7 @@ switch (diaSemana) {
     console.log("Segunda-feira");
     break;
   case 2:
-    console.log("Terca-feira");
+    console.log("Terça-feira");
     break;
   case 3:
     console.log("Quarta-feira");
@@ -78,11 +78,11 @@ switch (diaSemana) {
     console.log("Final de semana");
     break;
   default:
-    console.log("Dia invalido");
+    console.log("Dia inválido");
 }
 ```
 
-> **Atencao ao `break`!** Sem ele, a execucao "cai" para o proximo case (fall-through), exatamente como em C.
+> **Atenção ao `break`!** Sem ele, a execução "cai" para o próximo case (fall-through), exatamente como em C.
 
 ### 1.5 switch com strings
 
@@ -102,20 +102,20 @@ switch (operacao) {
     console.log(10 * 5);
     break;
   default:
-    console.log("Operacao desconhecida");
+    console.log("Operação desconhecida");
 }
 ```
 
 ---
 
-## 2. Estruturas de Repeticao (Lacos/Malhas)
+## 2. Estruturas de Repetição (Laços/Malhas)
 
 ### 2.1 for
 
 ```typescript
-// Estrutura: for (inicio; condicao; incremento)
+// Estrutura: for (início; condição; incremento)
 for (let i: number = 0; i < 5; i++) {
-  console.log(`Iteracao ${i}`);
+  console.log(`Iteração ${i}`);
 }
 // Saida: 0, 1, 2, 3, 4
 ```
@@ -131,7 +131,7 @@ for (let i: number = 10; i >= 0; i--) {
 
 ### 2.2 while
 
-Executa enquanto a condicao for verdadeira. Testa **antes** de executar:
+Executa enquanto a condição for verdadeira. Testa **antes** de executar:
 
 ```typescript
 let contador: number = 0;
@@ -170,9 +170,9 @@ for (let i: number = 0; i < 100; i++) {
 }
 // Saida: 0, 1, 2, 3, 4
 
-// continue - pula para a proxima iteracao
+// continue - pula para a próxima iteração
 for (let i: number = 0; i < 10; i++) {
-  if (i % 2 !== 0) continue;  // pula impares
+  if (i % 2 !== 0) continue;  // pula ímpares
   console.log(i);
 }
 // Saida: 0, 2, 4, 6, 8
@@ -180,17 +180,17 @@ for (let i: number = 0; i < 10; i++) {
 
 ### 2.5 for...of (exclusivo do JavaScript/TypeScript)
 
-Itera sobre os **valores** de um iteravel (arrays, strings):
+Itera sobre os **valores** de um iterável (arrays, strings):
 
 ```typescript
-const frutas: string[] = ["maca", "banana", "laranja"];
+const frutas: string[] = ["maçã", "banana", "laranja"];
 
 for (const fruta of frutas) {
   console.log(fruta);
 }
-// maca, banana, laranja
+// maçã, banana, laranja
 
-// Tambem funciona com strings
+// Também funciona com strings
 const palavra: string = "FATEC";
 for (const letra of palavra) {
   console.log(letra);
@@ -198,7 +198,7 @@ for (const letra of palavra) {
 // F, A, T, E, C
 ```
 
-> Isso nao existe em C. E muito mais pratico que iterar com indice quando voce so precisa dos valores.
+> Isso não existe em C. É muito mais prático que iterar com índice quando você só precisa dos valores.
 
 ---
 
@@ -215,7 +215,7 @@ for (let i: number = 1; i <= 10; i++) {
 }
 ```
 
-### 3.2 Numeros primos
+### 3.2 Números primos
 
 ```typescript
 function ehPrimo(n: number): boolean {
@@ -241,28 +241,28 @@ let opcao: number;
 
 do {
   console.log("\n=== MENU ===");
-  console.log("1. Opcao A");
-  console.log("2. Opcao B");
-  console.log("3. Opcao C");
+  console.log("1. Opção A");
+  console.log("2. Opção B");
+  console.log("3. Opção C");
   console.log("0. Sair");
 
-  opcao = 1; // Em um programa real, leria a entrada do usuario
+  opcao = 1; // Em um programa real, leria a entrada do usuário
 
   switch (opcao) {
     case 1:
-      console.log("Voce escolheu A");
+      console.log("Você escolheu A");
       break;
     case 2:
-      console.log("Voce escolheu B");
+      console.log("Você escolheu B");
       break;
     case 3:
-      console.log("Voce escolheu C");
+      console.log("Você escolheu C");
       break;
     case 0:
       console.log("Saindo...");
       break;
     default:
-      console.log("Opcao invalida!");
+      console.log("Opção inválida!");
   }
 } while (opcao !== 0);
 ```
@@ -274,7 +274,7 @@ const quantidade: number = 15;
 let anterior: number = 0;
 let atual: number = 1;
 
-console.log("Sequencia de Fibonacci:");
+console.log("Sequência de Fibonacci:");
 console.log(anterior);
 console.log(atual);
 
@@ -288,10 +288,10 @@ for (let i: number = 2; i < quantidade; i++) {
 
 ---
 
-## 4. Lacos Aninhados
+## 4. Laços Aninhados
 
 ```typescript
-// Tabela de multiplicacao 1 a 5
+// Tabela de multiplicação 1 a 5
 for (let i: number = 1; i <= 5; i++) {
   let linha: string = "";
   for (let j: number = 1; j <= 5; j++) {
@@ -301,7 +301,7 @@ for (let i: number = 1; i <= 5; i++) {
 }
 ```
 
-Saida:
+Saída:
 ```
    1   2   3   4   5
    2   4   6   8  10
@@ -314,46 +314,46 @@ Saida:
 
 ## 5. Git - Commitando por etapas
 
-Ao resolver exercicios, faca commits por etapa:
+Ao resolver exercícios, faça commits por etapa:
 
 ```bash
 git add src/tabuada.ts
 git commit -m "Implementa tabuada com for loop"
 
 git add src/primos.ts
-git commit -m "Adiciona verificacao de numeros primos"
+git commit -m "Adiciona verificação de números primos"
 
 git add src/fibonacci.ts
-git commit -m "Implementa sequencia de Fibonacci"
+git commit -m "Implementa sequência de Fibonacci"
 ```
 
-**Dica:** Um commit por exercicio cria um historico que mostra sua evolucao.
+**Dica:** Um commit por exercício cria um histórico que mostra sua evolução.
 
 ---
 
-## Exercicios Praticos
+## Exercícios Práticos
 
-### Exercicio 1 - Classificador de triangulos
+### Exercício 1 - Classificador de triângulos
 Crie `src/triangulo.ts` que:
-1. Recebe tres lados de um triangulo (constantes)
-2. Verifica se formam um triangulo valido (cada lado < soma dos outros dois)
-3. Classifica como: equilatero, isosceles ou escaleno
+1. Recebe três lados de um triângulo (constantes)
+2. Verifica se formam um triângulo válido (cada lado < soma dos outros dois)
+3. Classifica como: equilátero, isósceles ou escaleno
 
-### Exercicio 2 - FizzBuzz
+### Exercício 2 - FizzBuzz
 Crie `src/fizzbuzz.ts` que:
-1. Imprime numeros de 1 a 100
-2. Para multiplos de 3, imprime "Fizz" em vez do numero
-3. Para multiplos de 5, imprime "Buzz"
-4. Para multiplos de ambos, imprime "FizzBuzz"
+1. Imprime números de 1 a 100
+2. Para múltiplos de 3, imprime "Fizz" em vez do número
+3. Para múltiplos de 5, imprime "Buzz"
+4. Para múltiplos de ambos, imprime "FizzBuzz"
 
-### Exercicio 3 - Jogo de adivinhacao (simplificado)
+### Exercício 3 - Jogo de adivinhação (simplificado)
 Crie `src/adivinhacao.ts` que:
-1. Define um numero secreto (constante)
+1. Define um número secreto (constante)
 2. Simula tentativas em um array: `[50, 25, 37, 42]`
-3. Para cada tentativa, diz se e "maior", "menor" ou "acertou!"
-4. Ao acertar, exibe quantas tentativas foram necessarias
+3. Para cada tentativa, diz se é "maior", "menor" ou "acertou!"
+4. Ao acertar, exibe quantas tentativas foram necessárias
 
-### Exercicio 4 - Padrao visual
+### Exercício 4 - Padrão visual
 Crie `src/padrao.ts` que imprime:
 ```
 *
@@ -366,26 +366,26 @@ Crie `src/padrao.ts` que imprime:
 **
 *
 ```
-Use lacos aninhados. Dica: sao dois lacos for, um crescente e um decrescente.
+Use laços aninhados. Dica: são dois laços for, um crescente e um decrescente.
 
-### Exercicio 5 - Calculadora com menu
+### Exercício 5 - Calculadora com menu
 Crie `src/calculadora-menu.ts` que:
-1. Exibe um menu com operacoes (soma, sub, mult, div)
-2. Usa switch para executar a operacao
-3. Trata divisao por zero
-4. (Desafio) Use do...while para permitir varias operacoes
+1. Exibe um menu com operações (soma, sub, mult, div)
+2. Usa switch para executar a operação
+3. Trata divisão por zero
+4. (Desafio) Use do...while para permitir várias operações
 
 ---
 
-## Dica: Usando IA para Debugar Lacos
+## Dica: Usando IA para Debugar Laços
 
-Lacos sao uma fonte comum de bugs. O **GitHub Copilot Chat** pode ajudar:
+Laços são uma fonte comum de bugs. O **GitHub Copilot Chat** pode ajudar:
 
-1. Selecione um trecho de codigo com bug
-2. Abra o Copilot Chat e pergunte: *"Por que esse laco roda infinitamente?"*
-3. Ou peca: *"Trace a execucao desse for mostrando o valor de i a cada passo"*
+1. Selecione um trecho de código com bug
+2. Abra o Copilot Chat e pergunte: *"Por que esse laço roda infinitamente?"*
+3. Ou peça: *"Trace a execução desse for mostrando o valor de i a cada passo"*
 
-> **Desafio com IA:** Implemente o Exercicio 4 sozinho. Se travar, peca ao Copilot: *"Me de uma dica para imprimir um padrao de losango com asteriscos, sem me dar a resposta completa."* Isso treina o raciocinio logico com apoio da IA.
+> **Desafio com IA:** Implemente o Exercício 4 sozinho. Se travar, peça ao Copilot: *"Me dê uma dica para imprimir um padrão de losango com asteriscos, sem me dar a resposta completa."* Isso treina o raciocínio lógico com apoio da IA.
 
 ---
 

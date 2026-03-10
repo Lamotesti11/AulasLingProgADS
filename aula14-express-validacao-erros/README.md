@@ -5,8 +5,8 @@
 - Validar dados de entrada com Zod
 - Implementar tratamento de erros robusto
 - Padronizar respostas de erro da API
-- Criar middlewares de validacao reutilizaveis
-- Organizar o projeto com camada de servicos
+- Criar middlewares de validação reutilizáveis
+- Organizar o projeto com camada de serviços
 
 ---
 
@@ -21,16 +21,16 @@ curl -X POST http://localhost:3000/alunos \
   -d '{"nome": "", "email": "nao-e-email", "nota": "abc"}'
 ```
 
-Sem validacao, isso pode:
+Sem validação, isso pode:
 - Corromper seus dados
 - Causar erros inesperados
-- Abrir brechas de seguranca
+- Abrir brechas de segurança
 
 ---
 
-## 2. Validacao com Zod
+## 2. Validação com Zod
 
-O **Zod** e uma biblioteca de validacao com integracao nativa de tipos TypeScript:
+O **Zod** é uma biblioteca de validação com integração nativa de tipos TypeScript:
 
 ```bash
 npm install zod
@@ -44,14 +44,14 @@ import { z } from "zod";
 const AlunoSchema = z.object({
   nome: z.string()
     .min(2, "Nome deve ter pelo menos 2 caracteres")
-    .max(100, "Nome deve ter no maximo 100 caracteres"),
+    .max(100, "Nome deve ter no máximo 100 caracteres"),
   email: z.string()
-    .email("Email invalido"),
+    .email("Email inválido"),
   curso: z.string()
-    .min(1, "Curso e obrigatorio"),
+    .min(1, "Curso é obrigatório"),
   nota: z.number()
-    .min(0, "Nota minima e 0")
-    .max(10, "Nota maxima e 10"),
+    .min(0, "Nota mínima é 0")
+    .max(10, "Nota máxima é 10"),
 });
 
 // O Zod GERA o tipo TypeScript automaticamente!
@@ -61,7 +61,7 @@ type Aluno = z.infer<typeof AlunoSchema>;
 ### 2.2 Validando dados
 
 ```typescript
-// Validacao segura (nao lanca excecao)
+// Validação segura (não lança exceção)
 const resultado = AlunoSchema.safeParse({
   nome: "Ana",
   email: "ana@email.com",
@@ -70,28 +70,28 @@ const resultado = AlunoSchema.safeParse({
 });
 
 if (resultado.success) {
-  console.log("Dados validos:", resultado.data);
-  // resultado.data e tipado como Aluno!
+  console.log("Dados válidos:", resultado.data);
+  // resultado.data é tipado como Aluno!
 } else {
   console.log("Erros:", resultado.error.issues);
 }
 ```
 
-### 2.3 Schema para atualizacao parcial
+### 2.3 Schema para atualização parcial
 
 ```typescript
 // partial() torna todos os campos opcionais (para PATCH/PUT parcial)
 const AtualizarAlunoSchema = AlunoSchema.partial();
 
-// pick() seleciona campos especificos
+// pick() seleciona campos específicos
 const AtualizarNotaSchema = AlunoSchema.pick({ nota: true });
 ```
 
 ---
 
-## 3. Middleware de Validacao
+## 3. Middleware de Validação
 
-Crie um middleware reutilizavel que valida o body contra qualquer schema Zod:
+Crie um middleware reutilizável que valida o body contra qualquer schema Zod:
 
 ```typescript
 // src/middlewares/validar.ts
@@ -109,7 +109,7 @@ export function validar(schema: ZodSchema) {
       }));
 
       res.status(400).json({
-        erro: "Dados invalidos",
+        erro: "Dados inválidos",
         detalhes: erros,
       });
       return;
@@ -135,11 +135,11 @@ router.post("/", validar(AlunoSchema), (req, res) => {
   res.status(201).json(aluno);
 });
 
-// PUT usa validacao parcial
+// PUT usa validação parcial
 router.put("/:id", validar(AtualizarAlunoSchema), (req, res) => {
   const aluno = repo.atualizar(Number(req.params.id), req.body);
   if (!aluno) {
-    res.status(404).json({ erro: "Aluno nao encontrado" });
+    res.status(404).json({ erro: "Aluno não encontrado" });
     return;
   }
   res.json(aluno);
@@ -150,10 +150,10 @@ Agora um POST com dados invalidos retorna:
 
 ```json
 {
-  "erro": "Dados invalidos",
+  "erro": "Dados inválidos",
   "detalhes": [
     { "campo": "nome", "mensagem": "Nome deve ter pelo menos 2 caracteres" },
-    { "campo": "email", "mensagem": "Email invalido" },
+    { "campo": "email", "mensagem": "Email inválido" },
     { "campo": "nota", "mensagem": "Expected number, received string" }
   ]
 }
@@ -179,7 +179,7 @@ export class ApiError extends Error {
 
 export class NotFoundError extends ApiError {
   constructor(recurso: string) {
-    super(404, `${recurso} nao encontrado(a)`);
+    super(404, `${recurso} não encontrado(a)`);
   }
 }
 
@@ -239,7 +239,7 @@ router.get("/:id", (req, res, next) => {
 
 ### 4.4 Wrapper para async
 
-Para nao precisar de try/catch em toda rota:
+Para não precisar de try/catch em toda rota:
 
 ```typescript
 // src/utils/async-handler.ts
@@ -265,9 +265,9 @@ router.get("/:id", asyncHandler(async (req, res) => {
 
 ---
 
-## 5. Camada de Servicos
+## 5. Camada de Serviços
 
-Separe a logica de negocio das rotas:
+Separe a lógica de negócio das rotas:
 
 ```typescript
 // src/services/aluno-service.ts
@@ -302,7 +302,7 @@ export function criarAluno(dados: Omit<Aluno, "id">): Aluno {
   // Verificar email duplicado
   const existente = repo.listarTodos().find((a) => a.email === dados.email);
   if (existente) {
-    throw new BadRequestError("Ja existe um aluno com esse email");
+    throw new BadRequestError("Já existe um aluno com esse email");
   }
   return repo.criar(dados);
 }
@@ -417,7 +417,7 @@ Padronize todas as respostas da API:
 
 ## 8. Git - Pull Requests
 
-Agora que a API esta madura, pratique Pull Requests:
+Agora que a API está madura, pratique Pull Requests:
 
 ```bash
 # Crie uma branch para a feature
@@ -425,7 +425,7 @@ git checkout -b feature/validacao-zod
 
 # Implemente, commite...
 git add .
-git commit -m "Adiciona validacao com Zod e middleware de validacao"
+git commit -m "Adiciona validação com Zod e middleware de validação"
 
 # Push da branch
 git push -u origin feature/validacao-zod
@@ -439,48 +439,48 @@ No GitHub:
 
 ---
 
-## Exercicios Praticos
+## Exercícios Práticos
 
-### Exercicio 1 - Validacao completa
-Adicione validacao Zod em todas as rotas da API de alunos:
-1. Crie schemas para criacao e atualizacao
+### Exercício 1 - Validação completa
+Adicione validação Zod em todas as rotas da API de alunos:
+1. Crie schemas para criação e atualização
 2. Aplique o middleware `validar` nas rotas POST e PUT
-3. Teste com dados validos e invalidos
+3. Teste com dados válidos e inválidos
 
-### Exercicio 2 - Erros customizados
+### Exercício 2 - Erros customizados
 1. Implemente `ApiError`, `NotFoundError` e `BadRequestError`
 2. Crie o middleware `errorHandler`
 3. Aplique em todas as rotas
 4. Teste: buscar ID inexistente, criar com email duplicado
 
-### Exercicio 3 - Camada de servicos
-1. Refatore a API separando a logica em `services/`
-2. As rotas devem apenas chamar o servico e retornar a resposta
-3. Adicione regra: aluno so pode ser removido se nota for < 3
+### Exercício 3 - Camada de serviços
+1. Refatore a API separando a lógica em `services/`
+2. As rotas devem apenas chamar o serviço e retornar a resposta
+3. Adicione regra: aluno só pode ser removido se nota for < 3
 
-### Exercicio 4 - API de Tarefas completa
+### Exercício 4 - API de Tarefas completa
 Crie uma API completa de tarefas (to-do) com:
-1. Schema Zod para Tarefa (titulo, descricao?, prioridade: "baixa"|"media"|"alta", concluida)
-2. CRUD completo com persistencia JSON
-3. Validacao em todas as rotas
+1. Schema Zod para Tarefa (título, descrição?, prioridade: "baixa"|"média"|"alta", concluída)
+2. CRUD completo com persistência JSON
+3. Validação em todas as rotas
 4. Tratamento de erros padronizado
-5. Filtros: por prioridade, por status (concluida/pendente)
+5. Filtros: por prioridade, por status (concluída/pendente)
 6. Organize em routes/, services/, data/, schemas/, middlewares/
 
 ---
 
-## Dica: IA e Validacao
+## Dica: IA e Validação
 
 1. **Gerar schemas Zod a partir de interfaces:**
-   Peca ao Copilot: *"Converta essa interface TypeScript em um schema Zod com validacoes apropriadas"*
+   Peça ao Copilot: *"Converta essa interface TypeScript em um schema Zod com validações apropriadas"*
 
-2. **Descobrir validacoes:**
-   *"Quais validacoes o Zod oferece para strings? (email, url, uuid, etc.)"*
+2. **Descobrir validações:**
+   *"Quais validações o Zod oferece para strings? (email, url, uuid, etc.)"*
 
-3. **Revisar seguranca:**
-   Selecione suas rotas e peca: *"Quais validacoes estao faltando nessas rotas?"*
+3. **Revisar segurança:**
+   Selecione suas rotas e peça: *"Quais validações estão faltando nessas rotas?"*
 
-> **Reflexao:** Validacao e a primeira linha de defesa da sua API. Toda vez que voce aceitar dados sem validar, esta confiando que o cliente enviou algo correto - e isso raramente e verdade.
+> **Reflexão:** Validação é a primeira linha de defesa da sua API. Toda vez que você aceitar dados sem validar, está confiando que o cliente enviou algo correto - e isso raramente é verdade.
 
 ---
 

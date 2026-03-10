@@ -5,7 +5,7 @@
 - Criar e manipular objetos em TypeScript
 - Definir interfaces para tipar estruturas de dados
 - Usar type aliases para criar tipos personalizados
-- Entender a diferenca entre interface e type
+- Entender a diferença entre interface e type
 - Trabalhar com arrays de objetos
 
 ---
@@ -39,7 +39,7 @@ console.log(aluno["idade"]); // 21
 > // TypeScript
 > const aluno = { nome: "Ana", idade: 21, curso: "ADS" };
 > ```
-> A grande diferenca: em TS nao precisa declarar a struct antes, e os campos sao dinamicos.
+> A grande diferença: em TS não precisa declarar a struct antes, e os campos são dinâmicos.
 
 ### 1.2 Modificando objetos
 
@@ -52,7 +52,7 @@ const produto = {
 // Alterar valor de uma propriedade
 produto.preco = 3200;
 
-// Adicionar nova propriedade (nao recomendado sem tipagem)
+// Adicionar nova propriedade (não recomendado sem tipagem)
 // produto.desconto = 10;  // TS pode reclamar dependendo da tipagem
 ```
 
@@ -94,7 +94,7 @@ interface Produto {
   estoque?: number;    // opcional
 }
 
-// Ok - descricao e estoque sao opcionais
+// Ok - descrição e estoque são opcionais
 const produto: Produto = {
   nome: "Mouse",
   preco: 89.90,
@@ -126,7 +126,7 @@ config.nome = "Novo Nome";  // ok
 
 `type` cria um **alias** (apelido) para qualquer tipo:
 
-### 3.1 Tipos basicos
+### 3.1 Tipos básicos
 
 ```typescript
 type ID = string;
@@ -150,15 +150,15 @@ const ponto: Coordenada = { x: 10, y: 20 };
 
 ### 3.3 Interface vs Type - Quando usar?
 
-| Caracteristica | interface | type |
+| Característica | interface | type |
 |----------------|-----------|------|
 | Objetos | Sim | Sim |
-| Union types | Nao | Sim |
-| Extends/heranca | Sim (extends) | Sim (intersecao &) |
-| Reabrir/estender depois | Sim | Nao |
-| Tipos primitivos | Nao | Sim |
+| Union types | Não | Sim |
+| Extends/herança | Sim (extends) | Sim (interseção &) |
+| Reabrir/estender depois | Sim | Não |
+| Tipos primitivos | Não | Sim |
 
-**Regra pratica:** Use `interface` para objetos e `type` para todo o resto.
+**Regra prática:** Use `interface` para objetos e `type` para todo o resto.
 
 ---
 
@@ -188,9 +188,9 @@ const aprovados: Aluno[] = turma.filter((a) => a.nota >= 6);
 const nomesAprovados: string[] = aprovados.map((a) => a.nome);
 console.log(nomesAprovados);  // ["Ana", "Bruno", "Carlos", "Eduardo"]
 
-// Media da turma
+// Média da turma
 const media: number = turma.reduce((soma, a) => soma + a.nota, 0) / turma.length;
-console.log(`Media: ${media.toFixed(1)}`);  // "Media: 7.0"
+console.log(`Média: ${media.toFixed(1)}`);  // "Média: 7.0"
 
 // Encontrar aluno por nome
 const buscado: Aluno | undefined = turma.find((a) => a.nome === "Carlos");
@@ -226,17 +226,17 @@ const func: Funcionario = {
   endereco: {
     rua: "Av. Brasil",
     numero: 1000,
-    cidade: "Sao Paulo",
+    cidade: "São Paulo",
     estado: "SP",
   },
 };
 
-console.log(func.endereco.cidade);  // "Sao Paulo"
+console.log(func.endereco.cidade);  // "São Paulo"
 ```
 
 ---
 
-## 6. Funcoes com Objetos
+## 6. Funções com Objetos
 
 ```typescript
 interface Retangulo {
@@ -252,14 +252,14 @@ function calcularPerimetro(ret: Retangulo): number {
   return 2 * (ret.largura + ret.altura);
 }
 
-// Funcao que retorna um objeto
+// Função que retorna um objeto
 function criarRetangulo(largura: number, altura: number): Retangulo {
   return { largura, altura };  // shorthand: { largura: largura, altura: altura }
 }
 
 const r = criarRetangulo(10, 5);
 console.log(`Area: ${calcularArea(r)}`);          // 50
-console.log(`Perimetro: ${calcularPerimetro(r)}`); // 30
+console.log(`Perímetro: ${calcularPerimetro(r)}`); // 30
 ```
 
 ---
@@ -274,7 +274,7 @@ const aluno = {
   nota: 8.5,
 };
 
-// Extrair propriedades em variaveis
+// Extrair propriedades em variáveis
 const { nome, nota } = aluno;
 console.log(nome);  // "Ana"
 console.log(nota);  // 8.5
@@ -283,7 +283,7 @@ console.log(nota);  // 8.5
 const { nome: nomeAluno, curso: cursoAluno } = aluno;
 console.log(nomeAluno);  // "Ana"
 
-// Em parametros de funcao
+// Em parâmetros de função
 function exibirAluno({ nome, nota }: Aluno): void {
   console.log(`${nome}: ${nota}`);
 }
@@ -311,7 +311,7 @@ const aluno = { ...dadosPessoais, ...dadosAcademicos };
 
 ## 9. Git - Tags para marcos
 
-Use tags do Git para marcar versoes ou marcos importantes:
+Use tags do Git para marcar versões ou marcos importantes:
 
 ```bash
 # Criar uma tag
@@ -326,45 +326,45 @@ git push --tags
 
 ---
 
-## Exercicios Praticos
+## Exercícios Práticos
 
-### Exercicio 1 - Cadastro de alunos
+### Exercício 1 - Cadastro de alunos
 Crie `src/alunos.ts`:
 1. Defina a interface `Aluno` com: nome, ra, notas (array), faltas
 2. Crie um array com pelo menos 5 alunos
-3. Implemente funcoes:
+3. Implemente funções:
    - `calcularMedia(aluno: Aluno): number`
    - `verificarAprovacao(aluno: Aluno): string` (media >= 6 E faltas <= 10)
-   - `gerarRelatorio(turma: Aluno[]): void` (exibe relatorio formatado)
+   - `gerarRelatorio(turma: Aluno[]): void` (exibe relatório formatado)
 
-### Exercicio 2 - Catalogo de produtos
+### Exercício 2 - Catálogo de produtos
 Crie `src/catalogo.ts`:
 1. Interface `Produto` com: id, nome, preco, categoria, estoque
 2. Array com pelo menos 8 produtos de categorias diferentes
-3. Funcoes:
+3. Funções:
    - Buscar por nome (parcial, case-insensitive)
    - Filtrar por categoria
    - Filtrar por faixa de preco (min e max)
    - Calcular valor total do estoque
 
-### Exercicio 3 - Agenda de contatos
+### Exercício 3 - Agenda de contatos
 Crie `src/agenda.ts`:
 1. Interfaces para `Telefone` (numero, tipo) e `Contato` (nome, email, telefones[])
-2. Funcoes para: adicionar, remover, buscar por nome, listar todos
+2. Funções para: adicionar, remover, buscar por nome, listar todos
 3. Use objetos aninhados e arrays de objetos
 
-### Exercicio 4 - Sistema de notas
+### Exercício 4 - Sistema de notas
 Crie `src/boletim.ts`:
 1. Interfaces: `Disciplina` (nome, nota, carga_horaria), `Boletim` (aluno, semestre, disciplinas[])
-2. Calcule: media ponderada (peso = carga horaria), coeficiente de rendimento
+2. Calcule: média ponderada (peso = carga horária), coeficiente de rendimento
 3. Liste disciplinas aprovadas e reprovadas
-4. Exiba relatorio completo
+4. Exiba relatório completo
 
 ---
 
 ## Dica: IA e Interfaces
 
-O Copilot e excelente para gerar interfaces a partir de exemplos:
+O Copilot é excelente para gerar interfaces a partir de exemplos:
 
 1. **Cole um JSON e peca a interface:**
    ```
@@ -372,13 +372,13 @@ O Copilot e excelente para gerar interfaces a partir de exemplos:
    ```
 
 2. **Gere dados de teste:**
-   Apos definir a interface, escreva:
+   Após definir a interface, escreva:
    ```typescript
    // Array com 10 alunos de teste
    ```
-   O Copilot gerara os dados seguindo a interface.
+   O Copilot gerará os dados seguindo a interface.
 
-> **Importante:** Sempre revise as interfaces geradas pela IA. Verifique se os tipos estao corretos e se propriedades que deveriam ser opcionais estao marcadas com `?`.
+> **Importante:** Sempre revise as interfaces geradas pela IA. Verifique se os tipos estão corretos e se propriedades que deveriam ser opcionais estão marcadas com `?`.
 
 ---
 

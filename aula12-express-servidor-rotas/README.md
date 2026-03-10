@@ -2,7 +2,7 @@
 
 ## Objetivos da Aula
 
-- Entender o que e o Express e por que utiliza-lo
+- Entender o que é o Express e por que utilizá-lo
 - Criar um servidor HTTP com Express
 - Definir rotas para diferentes endpoints
 - Receber e enviar dados em JSON
@@ -10,15 +10,15 @@
 
 ---
 
-## 1. O que e o Express?
+## 1. O que é o Express?
 
-**Express** e o framework web mais popular do Node.js. Ele simplifica a criacao de servidores HTTP e APIs.
+**Express** é o framework web mais popular do Node.js. Ele simplifica a criação de servidores HTTP e APIs.
 
 Sem Express, criar um servidor HTTP em Node puro seria muito verboso. O Express abstrai a complexidade e oferece:
 
 - Roteamento simples e poderoso
-- Middlewares (veremos na proxima aula)
-- Facil integracao com JSON
+- Middlewares (veremos na próxima aula)
+- Fácil integração com JSON
 - Enorme ecossistema de plugins
 
 ---
@@ -95,7 +95,7 @@ import express from "express";
 const app = express();
 const PORT = 3000;
 
-// Middleware para ler JSON no body das requisicoes
+// Middleware para ler JSON no body das requisições
 app.use(express.json());
 
 // Rota raiz
@@ -122,13 +122,13 @@ curl http://localhost:3000
 # {"mensagem":"API funcionando!"}
 ```
 
-> O `tsx watch` reinicia automaticamente quando voce salva alteracoes.
+> O `tsx watch` reinicia automaticamente quando você salva alterações.
 
 ---
 
-## 4. Rotas e Metodos HTTP
+## 4. Rotas e Métodos HTTP
 
-### 4.1 Rotas basicas
+### 4.1 Rotas básicas
 
 ```typescript
 // GET - Listar
@@ -142,7 +142,7 @@ app.get("/alunos/:id", (req, res) => {
   const aluno = alunos.find((a) => a.id === id);
 
   if (!aluno) {
-    res.status(404).json({ erro: "Aluno nao encontrado" });
+    res.status(404).json({ erro: "Aluno não encontrado" });
     return;
   }
 
@@ -163,7 +163,7 @@ app.put("/alunos/:id", (req, res) => {
   const indice = alunos.findIndex((a) => a.id === id);
 
   if (indice === -1) {
-    res.status(404).json({ erro: "Aluno nao encontrado" });
+    res.status(404).json({ erro: "Aluno não encontrado" });
     return;
   }
 
@@ -177,7 +177,7 @@ app.delete("/alunos/:id", (req, res) => {
   const indice = alunos.findIndex((a) => a.id === id);
 
   if (indice === -1) {
-    res.status(404).json({ erro: "Aluno nao encontrado" });
+    res.status(404).json({ erro: "Aluno não encontrado" });
     return;
   }
 
@@ -189,13 +189,13 @@ app.delete("/alunos/:id", (req, res) => {
 ### 4.2 Parametros de rota
 
 ```typescript
-// :id e um parametro de rota
+// :id é um parâmetro de rota
 app.get("/alunos/:id", (req, res) => {
   const id = req.params.id;  // string! Precisa converter
   console.log(`Buscando aluno ${id}`);
 });
 
-// Multiplos parametros
+// Múltiplos parâmetros
 app.get("/turmas/:turmaId/alunos/:alunoId", (req, res) => {
   const { turmaId, alunoId } = req.params;
   // ...
@@ -204,7 +204,7 @@ app.get("/turmas/:turmaId/alunos/:alunoId", (req, res) => {
 
 ### 4.3 Query strings
 
-Query strings sao parametros na URL apos `?`:
+Query strings são parâmetros na URL após `?`:
 
 ```
 GET /alunos?curso=ADS&aprovado=true
@@ -219,7 +219,7 @@ app.get("/alunos", (req, res) => {
     resultado = resultado.filter((a) => a.curso === req.query.curso);
   }
 
-  // Filtrar por aprovacao
+  // Filtrar por aprovação
   if (req.query.aprovado === "true") {
     resultado = resultado.filter((a) => a.nota >= 6);
   }
@@ -279,7 +279,7 @@ app.get("/alunos/:id", (req: Request, res: Response) => {
   const aluno = alunos.find((a) => a.id === id);
 
   if (!aluno) {
-    res.status(404).json({ erro: "Aluno nao encontrado" });
+    res.status(404).json({ erro: "Aluno não encontrado" });
     return;
   }
 
@@ -291,7 +291,7 @@ app.post("/alunos", (req: Request, res: Response) => {
   const { nome, email, curso, nota } = req.body;
 
   if (!nome || !email || !curso || nota === undefined) {
-    res.status(400).json({ erro: "Campos obrigatorios: nome, email, curso, nota" });
+    res.status(400).json({ erro: "Campos obrigatórios: nome, email, curso, nota" });
     return;
   }
 
@@ -313,7 +313,7 @@ app.put("/alunos/:id", (req: Request, res: Response) => {
   const indice = alunos.findIndex((a) => a.id === id);
 
   if (indice === -1) {
-    res.status(404).json({ erro: "Aluno nao encontrado" });
+    res.status(404).json({ erro: "Aluno não encontrado" });
     return;
   }
 
@@ -328,7 +328,7 @@ app.delete("/alunos/:id", (req: Request, res: Response) => {
   const indice = alunos.findIndex((a) => a.id === id);
 
   if (indice === -1) {
-    res.status(404).json({ erro: "Aluno nao encontrado" });
+    res.status(404).json({ erro: "Aluno não encontrado" });
     return;
   }
 
@@ -425,7 +425,7 @@ app.listen(3000);
 
 ---
 
-## 8. Git - Commits semanticos para APIs
+## 8. Git - Commits semânticos para APIs
 
 Ao construir uma API, use commits descritivos:
 
@@ -433,27 +433,27 @@ Ao construir uma API, use commits descritivos:
 git commit -m "Configura projeto Express com TypeScript"
 git commit -m "Adiciona rota GET /alunos para listar todos"
 git commit -m "Adiciona rota GET /alunos/:id com tratamento 404"
-git commit -m "Adiciona rota POST /alunos com validacao basica"
+git commit -m "Adiciona rota POST /alunos com validação básica"
 git commit -m "Adiciona rotas PUT e DELETE para alunos"
 git commit -m "Adiciona filtro por curso via query string"
 ```
 
 ---
 
-## Exercicios Praticos
+## Exercícios Práticos
 
-### Exercicio 1 - API basica
-Siga o tutorial completo da secao 5 e crie a API de alunos. Teste todos os endpoints com curl ou Thunder Client.
+### Exercício 1 - API básica
+Siga o tutorial completo da seção 5 e crie a API de alunos. Teste todos os endpoints com curl ou Thunder Client.
 
-### Exercicio 2 - API de produtos
+### Exercício 2 - API de produtos
 Crie uma API de produtos com:
 1. `GET /produtos` - listar (com filtro por categoria via query)
 2. `GET /produtos/:id` - buscar por ID
-3. `POST /produtos` - criar (valide campos obrigatorios)
+3. `POST /produtos` - criar (valide campos obrigatórios)
 4. `PUT /produtos/:id` - atualizar
 5. `DELETE /produtos/:id` - remover
 
-### Exercicio 3 - Estatisticas
+### Exercício 3 - Estatísticas
 Adicione a rota `GET /alunos/stats` que retorne:
 ```json
 {
@@ -466,8 +466,8 @@ Adicione a rota `GET /alunos/stats` que retorne:
 }
 ```
 
-### Exercicio 4 - Organizar com Router
-Refatore o Exercicio 2 separando as rotas em arquivo proprio usando `Router`.
+### Exercício 4 - Organizar com Router
+Refatore o Exercício 2 separando as rotas em arquivo próprio usando `Router`.
 
 ---
 
@@ -480,16 +480,16 @@ Refatore o Exercicio 2 separando as rotas em arquivo proprio usando `Router`.
    ```
 
 2. **Testar com curl:**
-   Peca ao Copilot: *"Gere comandos curl para testar todas as rotas dessa API"*
+   Peça ao Copilot: *"Gere comandos curl para testar todas as rotas dessa API"*
 
 3. **Debugar erros HTTP:**
    *"Minha rota POST retorna 404, o que pode estar errado?"*
 
-> **Cuidado:** O Copilot pode gerar codigo que nao valida inputs. Sempre adicione validacoes basicas (campos obrigatorios, tipos corretos).
+> **Cuidado:** O Copilot pode gerar código que não valida inputs. Sempre adicione validações básicas (campos obrigatórios, tipos corretos).
 
 ---
 
 ## Leitura Complementar
 
-- [Express - Documentacao](https://expressjs.com/)
+- [Express - Documentação](https://expressjs.com/)
 - [Express - Routing Guide](https://expressjs.com/en/guide/routing.html)

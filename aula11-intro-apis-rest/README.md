@@ -1,31 +1,31 @@
-# Aula 11 - Introducao a APIs REST e HTTP
+# Aula 11 - Introdução a APIs REST e HTTP
 
 ## Objetivos da Aula
 
-- Entender o que e uma API e por que sao essenciais no desenvolvimento moderno
-- Compreender o protocolo HTTP: metodos, status codes, headers
-- Conhecer os principios da arquitetura REST
-- Consumir APIs publicas usando fetch
+- Entender o que é uma API e por que são essenciais no desenvolvimento moderno
+- Compreender o protocolo HTTP: métodos, status codes, headers
+- Conhecer os princípios da arquitetura REST
+- Consumir APIs públicas usando fetch
 - Entender JSON como formato de troca de dados
 
 ---
 
-## 1. O que e uma API?
+## 1. O que é uma API?
 
-**API** (Application Programming Interface) e uma interface que permite que diferentes sistemas se comuniquem.
+**API** (Application Programming Interface) é uma interface que permite que diferentes sistemas se comuniquem.
 
 Analogia: um restaurante.
-- Voce (cliente) nao vai ate a cozinha preparar a comida
-- Voce faz um **pedido** ao garcom (API)
-- O garcom leva o pedido a cozinha (servidor)
-- A cozinha prepara e o garcom traz a **resposta**
+- Você (cliente) não vai até a cozinha preparar a comida
+- Você faz um **pedido** ao garçom (API)
+- O garçom leva o pedido à cozinha (servidor)
+- A cozinha prepara e o garçom traz a **resposta**
 
 ### APIs no mundo real
 
 - **Google Maps API**: apps usam para exibir mapas
 - **API de pagamentos** (Stripe, PagSeguro): e-commerces processam pagamentos
-- **API do GitHub**: ferramentas interagem com repositorios
-- **APIs de IA** (OpenAI, Anthropic): apps integram inteligencia artificial
+- **API do GitHub**: ferramentas interagem com repositórios
+- **APIs de IA** (OpenAI, Anthropic): apps integram inteligência artificial
 
 ### Frontend <-> API <-> Banco de Dados
 
@@ -35,15 +35,15 @@ Analogia: um restaurante.
 [Outro Sistema]/
 ```
 
-A API e o **ponto central** que todos os clientes acessam.
+A API é o **ponto central** que todos os clientes acessam.
 
 ---
 
 ## 2. Protocolo HTTP
 
-Toda comunicacao na web usa o protocolo **HTTP** (HyperText Transfer Protocol).
+Toda comunicação na web usa o protocolo **HTTP** (HyperText Transfer Protocol).
 
-### 2.1 Anatomia de uma requisicao HTTP
+### 2.1 Anatomia de uma requisição HTTP
 
 ```
 [METODO] [URL]
@@ -65,9 +65,9 @@ Content-Type: application/json
 }
 ```
 
-### 2.2 Metodos HTTP
+### 2.2 Métodos HTTP
 
-| Metodo | Acao | Descricao | Exemplo |
+| Método | Ação | Descrição | Exemplo |
 |--------|------|-----------|---------|
 | **GET** | Ler | Buscar dados | Listar alunos |
 | **POST** | Criar | Enviar dados novos | Cadastrar aluno |
@@ -81,7 +81,7 @@ Content-Type: application/json
 > - **U**pdate = PUT/PATCH
 > - **D**elete = DELETE
 
-### 2.3 Status Codes (codigos de resposta)
+### 2.3 Status Codes (códigos de resposta)
 
 | Faixa | Significado | Exemplos |
 |-------|-------------|----------|
@@ -93,18 +93,18 @@ Content-Type: application/json
 Os mais comuns no dia a dia:
 
 ```
-200 - Tudo certo, aqui estao os dados
+200 - Tudo certo, aqui estão os dados
 201 - Criado com sucesso
-400 - Requisicao malformada (dados invalidos)
-401 - Nao autenticado (precisa fazer login)
-403 - Proibido (sem permissao)
-404 - Nao encontrado
+400 - Requisição malformada (dados inválidos)
+401 - Não autenticado (precisa fazer login)
+403 - Proibido (sem permissão)
+404 - Não encontrado
 500 - Erro interno do servidor
 ```
 
-### 2.4 Headers (cabecalhos)
+### 2.4 Headers (cabeçalhos)
 
-Metadados da requisicao/resposta:
+Metadados da requisição/resposta:
 
 ```
 Content-Type: application/json    # Formato dos dados
@@ -114,13 +114,13 @@ Accept: application/json          # Formato aceito na resposta
 
 ---
 
-## 3. O que e REST?
+## 3. O que é REST?
 
-**REST** (Representational State Transfer) e um estilo de arquitetura para APIs. Principios:
+**REST** (Representational State Transfer) é um estilo de arquitetura para APIs. Princípios:
 
 ### 3.1 Recursos e URLs
 
-Cada "coisa" do sistema e um **recurso** com uma URL propria:
+Cada "coisa" do sistema é um **recurso** com uma URL própria:
 
 ```
 GET    /alunos          -> Lista todos os alunos
@@ -133,8 +133,8 @@ DELETE /alunos/1        -> Remove aluno 1
 ### 3.2 Convencoes REST
 
 - URLs usam **substantivos** no plural: `/alunos`, `/produtos`, `/pedidos`
-- NAO usam verbos: ~~`/criarAluno`~~, ~~`/deletarProduto`~~
-- O metodo HTTP define a acao
+- NÃO usam verbos: ~~`/criarAluno`~~, ~~`/deletarProduto`~~
+- O método HTTP define a ação
 - Respostas em JSON
 
 ### 3.3 Exemplo de fluxo completo
@@ -152,14 +152,14 @@ Cliente                          Servidor
   |<-- 200 {id: 1, nome: "Ana"} --|
   |                                 |
   |-- DELETE /alunos/1 ------------>|
-  |<-- 204 (sem conteudo) ---------|
+  |<-- 204 (sem conteúdo) ---------|
 ```
 
 ---
 
 ## 4. Consumindo APIs com fetch
 
-O `fetch` e a forma nativa de fazer requisicoes HTTP no Node.js (v18+):
+O `fetch` é a forma nativa de fazer requisições HTTP no Node.js (v18+):
 
 ### 4.1 GET - Buscando dados
 
@@ -168,7 +168,7 @@ async function buscarUsuarios(): Promise<void> {
   const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
   const usuarios = await resposta.json();
 
-  console.log(`Total: ${usuarios.length} usuarios`);
+  console.log(`Total: ${usuarios.length} usuários`);
   usuarios.forEach((u: any) => {
     console.log(`- ${u.name} (${u.email})`);
   });
@@ -253,7 +253,7 @@ async function buscarComSeguranca(url: string): Promise<any> {
     return await resposta.json();
   } catch (erro) {
     if (erro instanceof Error) {
-      console.log(`Erro na requisicao: ${erro.message}`);
+      console.log(`Erro na requisição: ${erro.message}`);
     }
     return null;
   }
@@ -306,10 +306,10 @@ main();
 
 ---
 
-## 6. Async/Await - Revisao Rapida
+## 6. Async/Await - Revisão Rápida
 
 ```typescript
-// Funcao assincrona - retorna uma Promise
+// Função assíncrona - retorna uma Promise
 async function buscarDados(): Promise<string> {
   // await "espera" a Promise resolver
   const resposta = await fetch("https://api.exemplo.com/dados");
@@ -317,7 +317,7 @@ async function buscarDados(): Promise<string> {
   return dados;
 }
 
-// Chamando funcao assincrona
+// Chamando função assíncrona
 async function main(): Promise<void> {
   const resultado = await buscarDados();
   console.log(resultado);
@@ -326,13 +326,13 @@ async function main(): Promise<void> {
 main();
 ```
 
-> **Regra:** Sempre que usar `await`, a funcao precisa ser `async`. E o ponto de entrada (`main`) tambem precisa ser `async`.
+> **Regra:** Sempre que usar `await`, a função precisa ser `async`. E o ponto de entrada (`main`) também precisa ser `async`.
 
 ---
 
 ## 7. Git - Branches para features
 
-Ao comecar uma nova funcionalidade:
+Ao começar uma nova funcionalidade:
 
 ```bash
 # Criar branch de feature
@@ -352,48 +352,48 @@ git branch -d feature/consumir-api-cep
 
 ---
 
-## Exercicios Praticos
+## Exercícios Práticos
 
-### Exercicio 1 - Consulta de CEP
+### Exercício 1 - Consulta de CEP
 Crie `src/cep.ts` que:
 1. Consulta um CEP na API ViaCEP
-2. Exibe o endereco formatado
-3. Trate o caso de CEP invalido
+2. Exibe o endereço formatado
+3. Trate o caso de CEP inválido
 4. Consulte 3 CEPs diferentes e exiba os resultados
 
-### Exercicio 2 - Listagem de usuarios
+### Exercício 2 - Listagem de usuários
 Crie `src/usuarios.ts` que:
-1. Busca usuarios da JSONPlaceholder API
-2. Exiba nome, email e cidade de cada usuario
-3. Filtre usuarios de uma cidade especifica
+1. Busca usuários da JSONPlaceholder API
+2. Exiba nome, email e cidade de cada usuário
+3. Filtre usuários de uma cidade específica
 4. Calcule quantas cidades diferentes existem
 
-### Exercicio 3 - Pokedex simples
+### Exercício 3 - Pokedex simples
 Crie `src/pokedex.ts` que:
-1. Busque dados de um Pokemon por nome ou id na PokeAPI
+1. Busque dados de um Pokémon por nome ou id na PokeAPI
 2. Exiba: nome, tipo(s), peso, altura
-3. Busque 5 Pokemons e exiba uma tabela comparativa
+3. Busque 5 Pokémons e exiba uma tabela comparativa
 
-### Exercicio 4 - Preparacao para a proxima aula
+### Exercício 4 - Preparação para a próxima aula
 Crie `src/mini-api.ts` que:
-1. Defina a interface `Produto` (id, nome, preco, estoque)
-2. Crie um array em memoria com 5 produtos
-3. Implemente funcoes: `listar()`, `buscar(id)`, `criar(produto)`, `remover(id)`
-4. Pense: como transformar essas funcoes em endpoints de uma API?
+1. Defina a interface `Produto` (id, nome, preço, estoque)
+2. Crie um array em memória com 5 produtos
+3. Implemente funções: `listar()`, `buscar(id)`, `criar(produto)`, `remover(id)`
+4. Pense: como transformar essas funções em endpoints de uma API?
 
 ---
 
 ## Dica: IA e APIs
 
 1. **Gerar interfaces a partir de APIs:**
-   Faca uma requisicao e peca ao Copilot: *"Gere uma interface TypeScript para essa resposta JSON"*
+   Faça uma requisição e peça ao Copilot: *"Gere uma interface TypeScript para essa resposta JSON"*
 
 2. **Entender status codes:**
    *"Quando devo usar 200 vs 201 vs 204?"*
 
-3. **Testar APIs:** Recomende aos alunos instalar o **Thunder Client** (extensao do VS Code) para testar APIs visualmente, ou usar o `curl` no terminal.
+3. **Testar APIs:** Recomende aos alunos instalar o **Thunder Client** (extensão do VS Code) para testar APIs visualmente, ou usar o `curl` no terminal.
 
-> **Exercicio com IA:** No Exercicio 3, use o Copilot para gerar a interface do Pokemon baseada na resposta da API. Depois, adicione propriedades que o Copilot pode ter esquecido.
+> **Exercício com IA:** No Exercício 3, use o Copilot para gerar a interface do Pokémon baseada na resposta da API. Depois, adicione propriedades que o Copilot pode ter esquecido.
 
 ---
 

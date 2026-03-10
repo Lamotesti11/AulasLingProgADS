@@ -9,9 +9,9 @@
 
 ---
 
-## 1. O que sao Middlewares?
+## 1. O que são Middlewares?
 
-Middlewares sao funcoes que executam **entre** a requisicao e a resposta. Eles podem:
+Middlewares são funções que executam **entre** a requisição e a resposta. Eles podem:
 
 - Modificar a requisicao (`req`) ou resposta (`res`)
 - Executar logica (logs, autenticacao, validacao)
@@ -19,13 +19,13 @@ Middlewares sao funcoes que executam **entre** a requisicao e a resposta. Eles p
 - Chamar o proximo middleware com `next()`
 
 ```
-Requisicao -> [Middleware 1] -> [Middleware 2] -> [Rota] -> Resposta
+Requisição -> [Middleware 1] -> [Middleware 2] -> [Rota] -> Resposta
 ```
 
-### 1.1 Middleware que ja usamos
+### 1.1 Middleware que já usamos
 
 ```typescript
-// express.json() e um middleware que parseia o body JSON
+// express.json() é um middleware que parseia o body JSON
 app.use(express.json());
 ```
 
@@ -35,7 +35,7 @@ app.use(express.json());
 import { Request, Response, NextFunction } from "express";
 
 function meuMiddleware(req: Request, res: Response, next: NextFunction): void {
-  // Faca algo com req ou res
+  // Faça algo com req ou res
   console.log("Middleware executado!");
 
   // IMPORTANTE: chame next() para passar ao proximo middleware/rota
@@ -51,9 +51,9 @@ app.get("/alunos", meuMiddleware, (req, res) => { ... });
 
 ---
 
-## 2. Middlewares Uteis
+## 2. Middlewares Úteis
 
-### 2.1 Logger - registrar requisicoes
+### 2.1 Logger - registrar requisições
 
 ```typescript
 function logger(req: Request, res: Response, next: NextFunction): void {
@@ -65,7 +65,7 @@ function logger(req: Request, res: Response, next: NextFunction): void {
 app.use(logger);
 ```
 
-Saida no terminal:
+Saída no terminal:
 
 ```
 [2026-03-10T14:30:00.000Z] GET /alunos
@@ -73,7 +73,7 @@ Saida no terminal:
 [2026-03-10T14:30:02.000Z] DELETE /alunos/1
 ```
 
-### 2.2 CORS - permitir acesso de outros dominios
+### 2.2 CORS - permitir acesso de outros domínios
 
 ```bash
 npm install cors
@@ -83,16 +83,16 @@ npm install -D @types/cors
 ```typescript
 import cors from "cors";
 
-// Permitir requisicoes de qualquer origem
+// Permitir requisições de qualquer origem
 app.use(cors());
 
-// Ou restringir a origens especificas
+// Ou restringir a origens específicas
 app.use(cors({
   origin: "http://localhost:5173",  // Apenas seu frontend
 }));
 ```
 
-> **Por que CORS?** Por padrao, navegadores bloqueiam requisicoes de um dominio para outro (seguranca). O CORS libera esse acesso de forma controlada.
+> **Por que CORS?** Por padrão, navegadores bloqueiam requisições de um domínio para outro (segurança). O CORS libera esse acesso de forma controlada.
 
 ### 2.3 Middleware de autenticacao simples
 
@@ -101,7 +101,7 @@ function autenticar(req: Request, res: Response, next: NextFunction): void {
   const apiKey = req.headers["x-api-key"];
 
   if (apiKey !== "minha-chave-secreta") {
-    res.status(401).json({ erro: "Nao autorizado. Informe uma API key valida." });
+    res.status(401).json({ erro: "Não autorizado. Informe uma API key válida." });
     return;
   }
 
@@ -116,10 +116,10 @@ app.delete("/alunos/:id", autenticar, (req, res) => { ... });
 Teste:
 
 ```bash
-# Sem autenticacao - erro
+# Sem autenticação - erro
 curl -X POST http://localhost:3000/alunos -H "Content-Type: application/json" -d '{}'
 
-# Com autenticacao - funciona
+# Com autenticação - funciona
 curl -X POST http://localhost:3000/alunos \
   -H "Content-Type: application/json" \
   -H "x-api-key: minha-chave-secreta" \
@@ -128,7 +128,7 @@ curl -X POST http://localhost:3000/alunos \
 
 ---
 
-## 3. CRUD com Persistencia em JSON
+## 3. CRUD com Persistência em JSON
 
 Vamos evoluir a API para salvar dados em arquivo, usando o que aprendemos na Aula 10:
 
@@ -220,7 +220,7 @@ router.get("/", (req: Request, res: Response) => {
 router.get("/:id", (req: Request, res: Response) => {
   const aluno = repo.buscarPorId(Number(req.params.id));
   if (!aluno) {
-    res.status(404).json({ erro: "Aluno nao encontrado" });
+    res.status(404).json({ erro: "Aluno não encontrado" });
     return;
   }
   res.json(aluno);
@@ -230,7 +230,7 @@ router.post("/", (req: Request, res: Response) => {
   const { nome, email, curso, nota } = req.body;
 
   if (!nome || !email || !curso || nota === undefined) {
-    res.status(400).json({ erro: "Campos obrigatorios: nome, email, curso, nota" });
+    res.status(400).json({ erro: "Campos obrigatórios: nome, email, curso, nota" });
     return;
   }
 
@@ -241,7 +241,7 @@ router.post("/", (req: Request, res: Response) => {
 router.put("/:id", (req: Request, res: Response) => {
   const aluno = repo.atualizar(Number(req.params.id), req.body);
   if (!aluno) {
-    res.status(404).json({ erro: "Aluno nao encontrado" });
+    res.status(404).json({ erro: "Aluno não encontrado" });
     return;
   }
   res.json(aluno);
@@ -250,7 +250,7 @@ router.put("/:id", (req: Request, res: Response) => {
 router.delete("/:id", (req: Request, res: Response) => {
   const removido = repo.remover(Number(req.params.id));
   if (!removido) {
-    res.status(404).json({ erro: "Aluno nao encontrado" });
+    res.status(404).json({ erro: "Aluno não encontrado" });
     return;
   }
   res.status(204).send();
@@ -259,7 +259,7 @@ router.delete("/:id", (req: Request, res: Response) => {
 export default router;
 ```
 
-### 3.3 Server principal
+### 3.3 Servidor principal
 
 ```typescript
 // src/server.ts
@@ -287,7 +287,7 @@ app.use("/alunos", alunosRouter);
 app.get("/", (req, res) => {
   res.json({
     mensagem: "API de Alunos",
-    versao: "1.0.0",
+    versão: "1.0.0",
     endpoints: {
       alunos: "/alunos",
     },
@@ -312,10 +312,10 @@ api-alunos/
     routes/
       alunos.ts           # Rotas de alunos
     data/
-      aluno-repository.ts # Operacoes de dados
+      aluno-repository.ts # Operações de dados
     middlewares/
       logger.ts           # Middleware de log
-      auth.ts             # Middleware de autenticacao
+      auth.ts             # Middleware de autenticação
   package.json
   tsconfig.json
   .gitignore
@@ -325,7 +325,7 @@ api-alunos/
 
 ## 5. Middleware de Tratamento de Erros
 
-Middleware de erro tem **4 parametros** (o primeiro e o erro):
+Middleware de erro tem **4 parâmetros** (o primeiro é o erro):
 
 ```typescript
 import { Request, Response, NextFunction } from "express";
@@ -343,7 +343,7 @@ function tratarErros(
   });
 }
 
-// DEVE ser o ultimo middleware registrado
+// DEVE ser o último middleware registrado
 app.use(tratarErros);
 ```
 
@@ -365,28 +365,28 @@ Crie um `data/.gitkeep` para que o Git mantenha a pasta:
 ```bash
 touch data/.gitkeep
 git add data/.gitkeep
-git commit -m "Adiciona estrutura de dados com persistencia JSON"
+git commit -m "Adiciona estrutura de dados com persistência JSON"
 ```
 
 ---
 
-## Exercicios Praticos
+## Exercícios Práticos
 
-### Exercicio 1 - CRUD de Produtos com persistencia
-1. Crie uma API de produtos com persistencia em `produtos.json`
+### Exercício 1 - CRUD de Produtos com persistência
+1. Crie uma API de produtos com persistência em `produtos.json`
 2. Endpoints: GET (listar e buscar), POST, PUT, DELETE
 3. Adicione middleware de logger
 4. Teste todos os endpoints
 
-### Exercicio 2 - Middleware de tempo de resposta
+### Exercício 2 - Middleware de tempo de resposta
 Crie um middleware que:
-1. Registre o tempo de inicio da requisicao
-2. Apos a resposta, calcule o tempo total
+1. Registre o tempo de início da requisição
+2. Após a resposta, calcule o tempo total
 3. Exiba: `[GET /alunos] 15ms`
 4. Dica: use `res.on("finish", () => { ... })`
 
-### Exercicio 3 - Paginacao
-Adicione paginacao a rota GET /alunos:
+### Exercício 3 - Paginação
+Adicione paginação a rota GET /alunos:
 1. Query params: `?page=1&limit=10`
 2. Retorne os dados paginados com metadados:
 ```json
@@ -394,16 +394,16 @@ Adicione paginacao a rota GET /alunos:
   "dados": [...],
   "paginacao": {
     "total": 50,
-    "pagina": 1,
-    "porPagina": 10,
-    "totalPaginas": 5
+    "página": 1,
+    "porPágina": 10,
+    "totalPáginas": 5
   }
 }
 ```
 
-### Exercicio 4 - Multiplos recursos
+### Exercício 4 - Múltiplos recursos
 Expanda a API para ter dois recursos relacionados:
-1. `/cursos` - CRUD de cursos (id, nome, duracao)
+1. `/cursos` - CRUD de cursos (id, nome, duração)
 2. `/alunos` - adicione campo `cursoId` referenciando um curso
 3. `GET /cursos/:id/alunos` - listar alunos de um curso
 
@@ -411,14 +411,14 @@ Expanda a API para ter dois recursos relacionados:
 
 ## Dica: IA e Arquitetura de APIs
 
-1. **Gerar CRUD rapidamente:** Defina a interface e peca ao Copilot:
+1. **Gerar CRUD rapidamente:** Defina a interface e peça ao Copilot:
    *"Gere um repository com CRUD completo persistindo em JSON"*
 
-2. **Criar middlewares:** *"Crie um middleware Express que limita requisicoes a 100 por minuto por IP"*
+2. **Criar middlewares:** *"Crie um middleware Express que limita requisições a 100 por minuto por IP"*
 
-3. **Revisar codigo:** Selecione suas rotas e peca: *"Quais melhorias de seguranca posso fazer nessas rotas?"*
+3. **Revisar código:** Selecione suas rotas e peça: *"Quais melhorias de segurança posso fazer nessas rotas?"*
 
-> **Lembrete:** Middlewares sao um padrao importantissimo. Eles aparecem em praticamente todos os frameworks web, nao so no Express.
+> **Lembrete:** Middlewares são um padrão importantíssimo. Eles aparecem em praticamente todos os frameworks web, não só no Express.
 
 ---
 

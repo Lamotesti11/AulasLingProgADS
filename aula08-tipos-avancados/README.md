@@ -3,9 +3,9 @@
 ## Objetivos da Aula
 
 - Utilizar Union Types para valores que podem ter mais de um tipo
-- Aplicar Type Guards para verificacao segura de tipos
+- Aplicar Type Guards para verificação segura de tipos
 - Entender Literal Types e Enums
-- Introduzir Generics para funcoes e tipos reutilizaveis
+- Introduzir Generics para funções e tipos reutilizáveis
 - Usar Utility Types do TypeScript
 
 ---
@@ -20,12 +20,12 @@ let id: string | number;
 
 id = "ABC123";  // ok
 id = 42;        // ok
-// id = true;   // ERRO! boolean nao esta na uniao
+// id = true;   // ERRO! boolean não está na união
 ```
 
 > **Comparando com C:** Em C, `union` permite que uma variavel armazene diferentes tipos no mesmo espaco de memoria. Em TypeScript, Union Types sao verificados em tempo de compilacao - mais seguros.
 
-### 1.1 Union em funcoes
+### 1.1 Union em funções
 
 ```typescript
 function exibirId(id: string | number): void {
@@ -47,17 +47,17 @@ const misturado: (string | number)[] = ["Ana", 21, "Bruno", 22];
 
 ## 2. Type Guards (Estreitamento de Tipo)
 
-Quando voce tem um Union Type, precisa **verificar** qual tipo e antes de usar metodos especificos:
+Quando você tem um Union Type, precisa **verificar** qual tipo é antes de usar métodos específicos:
 
 ### 2.1 typeof
 
 ```typescript
 function processar(valor: string | number): string {
   if (typeof valor === "string") {
-    // Aqui o TS sabe que 'valor' e string
+    // Aqui o TS sabe que 'valor' é string
     return valor.toUpperCase();
   }
-  // Aqui o TS sabe que 'valor' e number
+  // Aqui o TS sabe que 'valor' é number
   return valor.toFixed(2);
 }
 
@@ -100,7 +100,7 @@ Tipos que aceitam apenas **valores especificos**:
 type Direcao = "norte" | "sul" | "leste" | "oeste";
 
 let rumo: Direcao = "norte";  // ok
-// rumo = "nordeste";          // ERRO! Nao esta nas opcoes
+// rumo = "nordeste";          // ERRO! Não está nas opções
 
 // Literal type com numeros
 type NotaConceito = 0 | 1 | 2 | 3 | 4 | 5;
@@ -109,7 +109,7 @@ let avaliacao: NotaConceito = 4;  // ok
 // avaliacao = 6;                  // ERRO!
 ```
 
-### Uso pratico - Status
+### Uso prático - Status
 
 ```typescript
 type StatusPedido = "pendente" | "processando" | "enviado" | "entregue" | "cancelado";
@@ -168,7 +168,7 @@ function tratarResposta(status: HttpStatus): string {
     case HttpStatus.OK:
       return "Sucesso!";
     case HttpStatus.NotFound:
-      return "Nao encontrado";
+      return "Não encontrado";
     case HttpStatus.InternalError:
       return "Erro do servidor";
     default:
@@ -183,7 +183,7 @@ function tratarResposta(status: HttpStatus): string {
 
 ## 5. Generics
 
-Generics permitem criar funcoes e tipos que funcionam com **qualquer tipo**, mantendo a seguranca:
+Generics permitem criar funções e tipos que funcionam com **qualquer tipo**, mantendo a segurança:
 
 ### 5.1 Funcao generica
 
@@ -202,7 +202,7 @@ const num = primeiroElemento([1, 2, 3]);       // tipo: number
 const str = primeiroElemento(["a", "b", "c"]); // tipo: string
 ```
 
-O `<T>` e um **parametro de tipo** - funciona como uma variavel para tipos.
+O `<T>` é um **parâmetro de tipo** - funciona como uma variável para tipos.
 
 ### 5.2 Mais exemplos
 
@@ -213,8 +213,8 @@ function ultimo<T>(arr: T[]): T | undefined {
 }
 
 // Funcao que filtra por tipo
-function filtrar<T>(arr: T[], condicao: (item: T) => boolean): T[] {
-  return arr.filter(condicao);
+function filtrar<T>(arr: T[], condição: (item: T) => boolean): T[] {
+  return arr.filter(condição);
 }
 
 const numeros: number[] = [1, 2, 3, 4, 5, 6];
@@ -234,7 +234,7 @@ interface Resposta<T> {
 const resp1: Resposta<string[]> = {
   sucesso: true,
   dados: ["Ana", "Bruno"],
-  mensagem: "Usuarios encontrados",
+  mensagem: "Usuários encontrados",
 };
 
 // Resposta com number
@@ -251,7 +251,7 @@ const resp2: Resposta<number> = {
 
 ## 6. Utility Types
 
-TypeScript vem com tipos utilitarios prontos:
+TypeScript vem com tipos utilitários prontos:
 
 ### 6.1 Partial - torna todas as propriedades opcionais
 
@@ -262,7 +262,7 @@ interface Usuario {
   idade: number;
 }
 
-// Util para atualizacoes parciais
+// Útil para atualizações parciais
 function atualizar(id: number, dados: Partial<Usuario>): void {
   console.log(`Atualizando ${id}:`, dados);
 }
@@ -302,23 +302,23 @@ const notas: NotasPorAluno = {
 
 ## 7. Type Assertions
 
-Quando voce sabe mais que o TypeScript sobre o tipo:
+Quando você sabe mais que o TypeScript sobre o tipo:
 
 ```typescript
 // Assertion com 'as'
 const valor: unknown = "Ola Mundo";
 const tamanho: number = (valor as string).length;
 
-// Util ao trabalhar com DOM ou dados externos
+// Útil ao trabalhar com DOM ou dados externos
 ```
 
 > **Cuidado:** Type assertions podem esconder bugs. Prefira Type Guards sempre que possivel.
 
 ---
 
-## 8. Git - Stash para guardar trabalho temporario
+## 8. Git - Stash para guardar trabalho temporário
 
-Quando voce precisa trocar de branch mas tem alteracoes nao commitadas:
+Quando você precisa trocar de branch mas tem alterações não commitadas:
 
 ```bash
 # Guardar alteracoes temporariamente
@@ -334,40 +334,40 @@ git stash pop
 
 ---
 
-## Exercicios Praticos
+## Exercícios Práticos
 
-### Exercicio 1 - Sistema de formas geometricas
+### Exercício 1 - Sistema de formas geométricas
 Crie `src/formas.ts`:
 1. Defina interfaces: `Circulo` (raio), `Retangulo` (largura, altura), `Triangulo` (base, altura)
 2. Crie um Union Type: `Forma = Circulo | Retangulo | Triangulo`
 3. Use uma propriedade `tipo` (literal type) para diferenciar
 4. Funcao `calcularArea(forma: Forma): number` com type guards
 
-### Exercicio 2 - Enums na pratica
+### Exercício 2 - Enums na prática
 Crie `src/pedidos.ts`:
 1. Enum `StatusPedido` e `FormaPagamento`
 2. Interface `Pedido` usando os enums
 3. Array de pedidos com diferentes status
-4. Funcoes para: filtrar por status, calcular total por forma de pagamento
+4. Funções para: filtrar por status, calcular total por forma de pagamento
 
-### Exercicio 3 - Funcao generica de busca
+### Exercício 3 - Função genérica de busca
 Crie `src/busca.ts`:
-1. Funcao generica `buscarPorCampo<T>(arr: T[], campo: keyof T, valor: unknown): T[]`
+1. Função genérica `buscarPorCampo<T>(arr: T[], campo: keyof T, valor: unknown): T[]`
 2. Teste com arrays de diferentes interfaces (Aluno, Produto, etc.)
-3. Funcao generica `ordenarPor<T>(arr: T[], campo: keyof T): T[]`
+3. Função genérica `ordenarPor<T>(arr: T[], campo: keyof T): T[]`
 
-### Exercicio 4 - API Response tipada
+### Exercício 4 - API Response tipada
 Crie `src/api-response.ts`:
-1. Interface generica `ApiResponse<T>` com: dados, sucesso, erro?, timestamp
-2. Funcao `criarSucesso<T>(dados: T): ApiResponse<T>`
-3. Funcao `criarErro<T>(mensagem: string): ApiResponse<T>`
+1. Interface genérica `ApiResponse<T>` com: dados, sucesso, erro?, timestamp
+2. Função `criarSucesso<T>(dados: T): ApiResponse<T>`
+3. Função `criarErro<T>(mensagem: string): ApiResponse<T>`
 4. Teste com diferentes tipos de dados
 
 ---
 
 ## Dica: IA e Tipos Complexos
 
-Tipos avancados podem ser dificeis de escrever. O Copilot e muito bom nisso:
+Tipos avançados podem ser difíceis de escrever. O Copilot é muito bom nisso:
 
 1. **Gerar tipos a partir de dados:**
    Cole um objeto e peca: *"Gere um tipo TypeScript para essa estrutura, usando union types onde fizer sentido"*
@@ -375,7 +375,7 @@ Tipos avancados podem ser dificeis de escrever. O Copilot e muito bom nisso:
 2. **Explicar Utility Types:**
    Peca: *"Me explique o que `Partial<Pick<Usuario, 'nome' | 'email'>>` significa"*
 
-3. **Desafio:** Tente resolver o Exercicio 3 sem ajuda. Depois peca ao Copilot: *"Tem como simplificar esse tipo?"* - voce pode aprender truques novos.
+3. **Desafio:** Tente resolver o Exercício 3 sem ajuda. Depois peça ao Copilot: *"Tem como simplificar esse tipo?"* - você pode aprender truques novos.
 
 ---
 

@@ -1,18 +1,18 @@
-# Aula 06 - Arrays e Metodos de Array
+# Aula 06 - Arrays e Métodos de Array
 
 ## Objetivos da Aula
 
 - Criar e manipular arrays tipados em TypeScript
-- Utilizar os principais metodos de array: push, pop, shift, unshift, splice
-- Aplicar metodos de iteracao: forEach, map, filter, find, reduce
-- Entender a diferenca entre referencia e copia de arrays
+- Utilizar os principais métodos de array: push, pop, shift, unshift, splice
+- Aplicar métodos de iteração: forEach, map, filter, find, reduce
+- Entender a diferença entre referência e cópia de arrays
 - Utilizar spread operator e destructuring com arrays
 
 ---
 
 ## 1. Criando Arrays
 
-### 1.1 Declaracao basica
+### 1.1 Declaração básica
 
 ```typescript
 // Array de numeros
@@ -36,7 +36,7 @@ const valores: Array<number> = [1, 2, 3];
 > // TypeScript - tamanho dinamico, tipo definido
 > const notas: number[] = [8.5, 7.0, 9.2, 6.8];
 > ```
-> Diferenca crucial: arrays em TypeScript sao **dinamicos** (crescem e diminuem conforme necessario).
+> Diferença crucial: arrays em TypeScript são **dinâmicos** (crescem e diminuem conforme necessário).
 
 ### 1.2 Acessando elementos
 
@@ -56,13 +56,13 @@ console.log(frutas[frutas.length - 1]);  // "laranja"
 ```typescript
 const diasSemana: readonly string[] = ["Seg", "Ter", "Qua", "Qui", "Sex"];
 
-// diasSemana.push("Sab");  // ERRO! Nao pode modificar array readonly
+// diasSemana.push("Sab");  // ERRO! Não pode modificar array readonly
 // diasSemana[0] = "Dom";   // ERRO!
 ```
 
 ---
 
-## 2. Metodos de Modificacao
+## 2. Métodos de Modificação
 
 ### 2.1 Adicionando e removendo elementos
 
@@ -82,7 +82,7 @@ lista.unshift("Z");        // ["Z", "A", "B", "C"]
 const primeiro = lista.shift(); // ["A", "B", "C"] -> primeiro = "Z"
 ```
 
-### 2.2 splice - o canivete suico
+### 2.2 splice - o canivete suíço
 
 ```typescript
 const letras: string[] = ["A", "B", "C", "D", "E"];
@@ -90,14 +90,14 @@ const letras: string[] = ["A", "B", "C", "D", "E"];
 // Remover 2 elementos a partir do indice 1
 letras.splice(1, 2);       // ["A", "D", "E"] (removeu B e C)
 
-// Inserir elementos na posicao 1
+// Inserir elementos na posição 1
 letras.splice(1, 0, "X", "Y"); // ["A", "X", "Y", "D", "E"]
 
-// Substituir: remove 1 a partir do indice 2, insere "Z"
+// Substituir: remove 1 a partir do índice 2, insere "Z"
 letras.splice(2, 1, "Z");      // ["A", "X", "Z", "D", "E"]
 ```
 
-### 2.3 Outros metodos uteis
+### 2.3 Outros métodos úteis
 
 ```typescript
 const nums: number[] = [3, 1, 4, 1, 5, 9];
@@ -111,13 +111,13 @@ nums.reverse();               // [9, 5, 4, 3, 1, 1]
 // Verificar se contem
 console.log(nums.includes(4));  // true
 
-// Encontrar indice
+// Encontrar índice
 console.log(nums.indexOf(5));   // 1
 ```
 
 ---
 
-## 3. Metodos de Iteracao (os mais importantes!)
+## 3. Métodos de Iteração (os mais importantes!)
 
 ### 3.1 forEach - executar algo para cada elemento
 
@@ -142,11 +142,11 @@ const numeros: number[] = [1, 2, 3, 4, 5];
 const dobrados: number[] = numeros.map((n: number) => n * 2);
 console.log(dobrados);  // [2, 4, 6, 8, 10]
 
-// O array original NAO muda
+// O array original NÃO muda
 console.log(numeros);   // [1, 2, 3, 4, 5]
 ```
 
-Exemplo pratico:
+Exemplo prático:
 
 ```typescript
 const precos: number[] = [100, 200, 50, 300];
@@ -170,7 +170,7 @@ console.log(menores);  // [15, 17, 12]
 
 ### 3.4 find - encontrar um elemento
 
-Retorna o **primeiro** elemento que satisfaz a condicao (ou `undefined`):
+Retorna o **primeiro** elemento que satisfaz a condição (ou `undefined`):
 
 ```typescript
 const numeros: number[] = [10, 23, 45, 60, 72];
@@ -181,7 +181,7 @@ console.log(primeiroPar);  // 10
 
 ### 3.5 reduce - reduzir a um unico valor
 
-O mais poderoso e versatil:
+O mais poderoso e versátil:
 
 ```typescript
 const numeros: number[] = [1, 2, 3, 4, 5];
@@ -198,19 +198,19 @@ console.log(soma);  // 15
 // reduce((10, 5) => 15)  -> resultado final = 15
 ```
 
-### 3.6 Encadeando metodos
+### 3.6 Encadeando métodos
 
-Os metodos podem ser combinados em cadeia:
+Os métodos podem ser combinados em cadeia:
 
 ```typescript
 const notas: number[] = [4.5, 7.0, 8.5, 3.0, 9.0, 6.5, 2.0];
 
-// Filtrar aprovados (>= 6), calcular media
+// Filtrar aprovados (>= 6), calcular média
 const mediaAprovados: number = notas
   .filter((nota) => nota >= 6)
   .reduce((soma, nota, _, arr) => soma + nota / arr.length, 0);
 
-console.log(`Media dos aprovados: ${mediaAprovados.toFixed(1)}`);
+console.log(`Média dos aprovados: ${mediaAprovados.toFixed(1)}`);
 ```
 
 ---
@@ -229,13 +229,13 @@ const verduras: string[] = ["alface", "tomate"];
 const alimentos: string[] = [...frutas, ...verduras];
 // ["maca", "banana", "alface", "tomate"]
 
-// Copiar um array (copia rasa)
-const copiaFrutas: string[] = [...frutas];
+// Copiar um array (cópia rasa)
+const cópiaFrutas: string[] = [...frutas];
 ```
 
-### 4.2 Destructuring (desestruturacao)
+### 4.2 Destructuring (desestruturação)
 
-Extrair valores de um array em variaveis individuais:
+Extrair valores de um array em variáveis individuais:
 
 ```typescript
 const coordenadas: number[] = [10, 20, 30];
@@ -258,26 +258,26 @@ console.log(rest);  // [2, 3, 4, 5]
 
 ---
 
-## 5. Referencia vs Copia
+## 5. Referência vs Cópia
 
-### Cuidado! Arrays sao passados por referencia
+### Cuidado! Arrays são passados por referência
 
 ```typescript
 const original: number[] = [1, 2, 3];
 
-// Isso NAO cria uma copia - ambas apontam para o mesmo array!
-const referencia = original;
-referencia.push(4);
-console.log(original);  // [1, 2, 3, 4] <- original tambem mudou!
+// Isso NÃO cria uma cópia - ambas apontam para o mesmo array!
+const referência = original;
+referência.push(4);
+console.log(original);  // [1, 2, 3, 4] <- original também mudou!
 
 // Para copiar de verdade, use spread:
-const copia = [...original];
-copia.push(5);
-console.log(original);  // [1, 2, 3, 4] <- original nao mudou
-console.log(copia);     // [1, 2, 3, 4, 5]
+const cópia = [...original];
+cópia.push(5);
+console.log(original);  // [1, 2, 3, 4] <- original não mudou
+console.log(cópia);     // [1, 2, 3, 4, 5]
 ```
 
-> **Comparando com C:** Em C, arrays sao passados como ponteiros para funcoes (passagem por referencia). O conceito e similar: ao atribuir um array a outra variavel em TS, ambas referenciam o mesmo espaco na memoria.
+> **Comparando com C:** Em C, arrays são passados como ponteiros para funções (passagem por referência). O conceito é similar: ao atribuir um array a outra variável em TS, ambas referenciam o mesmo espaço na memória.
 
 ---
 
@@ -304,22 +304,22 @@ git diff HEAD~1 HEAD
 
 ---
 
-## Exercicios Praticos
+## Exercícios Práticos
 
-### Exercicio 1 - Gerenciador de lista
+### Exercício 1 - Gerenciador de lista
 Crie `src/lista.ts` que:
 1. Crie um array de tarefas (strings)
-2. Implemente funcoes: `adicionarTarefa`, `removerTarefa`, `listarTarefas`
+2. Implemente funções: `adicionarTarefa`, `removerTarefa`, `listarTarefas`
 3. Demonstre o uso de push, splice e forEach
 
-### Exercicio 2 - Analise de notas
+### Exercício 2 - Análise de notas
 Crie `src/notas.ts` que dado um array de notas:
-1. Calcule a media usando `reduce`
+1. Calcule a média usando `reduce`
 2. Filtre aprovados (>= 6) e reprovados (< 6) usando `filter`
 3. Encontre a maior e menor nota usando `reduce` ou `Math.max/min` com spread
 4. Crie um novo array com as notas arredondadas usando `map`
 
-### Exercicio 3 - Transformacao de dados
+### Exercício 3 - Transformação de dados
 Dado o array:
 ```typescript
 const alunos: string[] = ["ana silva", "bruno costa", "carlos lima"];
@@ -328,7 +328,7 @@ const alunos: string[] = ["ana silva", "bruno costa", "carlos lima"];
 2. Use `filter` para pegar apenas nomes com mais de 10 caracteres
 3. Use `find` para buscar um aluno pelo primeiro nome
 
-### Exercicio 4 - Carrinho de compras
+### Exercício 4 - Carrinho de compras
 Crie `src/carrinho.ts` com arrays de produtos e precos:
 1. Adicione e remova itens do carrinho
 2. Calcule o total com `reduce`
@@ -337,17 +337,17 @@ Crie `src/carrinho.ts` com arrays de produtos e precos:
 
 ---
 
-## Dica: IA e Metodos de Array
+## Dica: IA e Métodos de Array
 
-Os metodos `map`, `filter` e `reduce` podem ser confusos no inicio. Use o Copilot para:
+Os métodos `map`, `filter` e `reduce` podem ser confusos no início. Use o Copilot para:
 
-1. **Converter for para metodos funcionais:**
-   Selecione um `for` e peca ao Copilot Chat: *"Converta esse for loop para usar map/filter/reduce"*
+1. **Converter for para métodos funcionais:**
+   Selecione um `for` e peça ao Copilot Chat: *"Converta esse for loop para usar map/filter/reduce"*
 
 2. **Entender encadeamento:**
-   Peca: *"Me explique passo a passo o que esse codigo faz"* e cole uma cadeia de metodos
+   Peça: *"Me explique passo a passo o que esse código faz"* e cole uma cadeia de métodos
 
-> **Exercicio com IA:** Resolva o Exercicio 2 de duas formas: primeiro com `for` tradicional, depois com metodos de array. Use o Copilot para comparar as abordagens e entender as vantagens de cada uma.
+> **Exercício com IA:** Resolva o Exercício 2 de duas formas: primeiro com `for` tradicional, depois com métodos de array. Use o Copilot para comparar as abordagens e entender as vantagens de cada uma.
 
 ---
 

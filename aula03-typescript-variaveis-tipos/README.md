@@ -1,18 +1,18 @@
-# Aula 03 - TypeScript: Variaveis, Constantes, Operadores e Expressoes
+# Aula 03 - TypeScript: Variáveis, Constantes, Operadores e Expressões
 
 ## Objetivos da Aula
 
-- Entender o que e TypeScript e por que usar em vez de JavaScript puro
+- Entender o que é TypeScript e por que usar em vez de JavaScript puro
 - Configurar um projeto TypeScript com Node.js
-- Declarar variaveis e constantes com tipos explicitos
-- Utilizar operadores aritmeticos, logicos e de comparacao
-- Construir expressoes e entender precedencia de operadores
+- Declarar variáveis e constantes com tipos explícitos
+- Utilizar operadores aritméticos, lógicos e de comparação
+- Construir expressões e entender precedência de operadores
 
 ---
 
-## 1. O que e TypeScript?
+## 1. O que é TypeScript?
 
-TypeScript e um **superset** do JavaScript criado pela Microsoft. Isso significa que todo codigo JavaScript valido tambem e TypeScript valido, mas TypeScript adiciona **tipagem estatica**.
+TypeScript é um **superset** do JavaScript criado pela Microsoft. Isso significa que todo código JavaScript válido também é TypeScript válido, mas TypeScript adiciona **tipagem estática**.
 
 ### Por que TypeScript?
 
@@ -34,10 +34,10 @@ function somar(a: number, b: number): number {
 }
 
 somar(5, 3);       // 8 (ok)
-somar("5", 3);     // ERRO! Argumento string nao e number
+somar("5", 3);     // ERRO! Argumento string não é number
 ```
 
-> **Comparando com C:** TypeScript traz para o JavaScript uma seguranca de tipos semelhante a que voces ja conhecem do C. A diferenca e que TypeScript verifica os tipos **em tempo de compilacao**, nao em tempo de execucao.
+> **Comparando com C:** TypeScript traz para o JavaScript uma segurança de tipos semelhante a que vocês já conhecem do C. A diferença é que TypeScript verifica os tipos **em tempo de compilação**, não em tempo de execução.
 
 ---
 
@@ -51,19 +51,19 @@ mkdir aula03-pratica
 cd aula03-pratica
 npm init -y
 
-# Instale o TypeScript como dependencia de desenvolvimento
+# Instale o TypeScript como dependência de desenvolvimento
 npm install -D typescript
 
 # Instale os tipos do Node.js
 npm install -D @types/node
 
-# Crie o arquivo de configuracao do TypeScript
+# Crie o arquivo de configuração do TypeScript
 npx tsc --init
 ```
 
 ### 2.2 Configurando o tsconfig.json
 
-Abra o `tsconfig.json` gerado e ajuste as opcoes principais:
+Abra o `tsconfig.json` gerado e ajuste as opções principais:
 
 ```json
 {
@@ -81,12 +81,12 @@ Abra o `tsconfig.json` gerado e ajuste as opcoes principais:
 }
 ```
 
-| Opcao | Significado |
+| Opção | Significado |
 |-------|-------------|
-| `target` | Versao do JS gerado |
-| `outDir` | Pasta de saida dos arquivos compilados |
+| `target` | Versão do JS gerado |
+| `outDir` | Pasta de saída dos arquivos compilados |
 | `rootDir` | Pasta dos arquivos fonte (.ts) |
-| `strict` | Ativa todas as verificacoes rigorosas de tipo |
+| `strict` | Ativa todas as verificações rigorosas de tipo |
 
 ### 2.3 Estrutura do projeto
 
@@ -111,9 +111,9 @@ aula03-pratica/
 }
 ```
 
-### 2.5 Alternativa rapida: tsx
+### 2.5 Alternativa rápida: tsx
 
-Para desenvolvimento, voce pode usar o `tsx` que executa TypeScript diretamente:
+Para desenvolvimento, você pode usar o `tsx` que executa TypeScript diretamente:
 
 ```bash
 npm install -D tsx
@@ -127,11 +127,11 @@ npm install -D tsx
 }
 ```
 
-> Isso elimina a etapa de compilacao durante o desenvolvimento. O `watch` reinicia ao salvar.
+> Isso elimina a etapa de compilação durante o desenvolvimento. O `watch` reinicia ao salvar.
 
 ---
 
-## 3. Variaveis e Constantes com Tipos
+## 3. Variáveis e Constantes com Tipos
 
 ### 3.1 Tipos primitivos
 
@@ -139,7 +139,7 @@ npm install -D tsx
 // String - texto
 let nome: string = "Ana";
 
-// Number - numeros inteiros e decimais
+// Number - números inteiros e decimais
 let idade: number = 21;
 let altura: number = 1.72;
 
@@ -151,20 +151,20 @@ let aprovado: boolean = true;
 > - C: `int`, `float`, `double`, `char` -> TS: `number` e `string`
 > - C: `int aprovado = 1;` -> TS: `let aprovado: boolean = true;`
 
-### 3.2 Inferencia de tipos
+### 3.2 Inferência de tipos
 
 TypeScript consegue **inferir** o tipo automaticamente:
 
 ```typescript
-// Com tipo explicito
-let cidade: string = "Sao Paulo";
+// Com tipo explícito
+let cidade: string = "São Paulo";
 
-// Com inferencia (TypeScript sabe que e string)
+// Com inferência (TypeScript sabe que é string)
 let estado = "SP";
 
-// Ambas as formas sao validas. Use tipo explicito quando:
-// - A inferencia nao e obvia
-// - Voce quer documentar a intencao
+// Ambas as formas são válidas. Use tipo explícito quando:
+// - A inferência não é óbvia
+// - Você quer documentar a intenção
 ```
 
 ### 3.3 const vs let
@@ -179,22 +179,22 @@ let contador: number = 0;
 contador = 1;  // ok
 contador = 2;  // ok
 
-// const nao pode ser reatribuido
+// const não pode ser reatribuído
 // PI = 3.14;  // ERRO! Cannot assign to 'PI' because it is a constant
 ```
 
-**Regra:** Use `const` por padrao. So use `let` quando **realmente** precisar reatribuir o valor.
+**Regra:** Use `const` por padrão. Só use `let` quando **realmente** precisar reatribuir o valor.
 
 ### 3.4 Tipos especiais
 
 ```typescript
-// any - desabilita a verificacao de tipo (evite!)
+// any - desabilita a verificação de tipo (evite!)
 let qualquerCoisa: any = "texto";
-qualquerCoisa = 42;     // sem erro, mas perde a seguranca
+qualquerCoisa = 42;     // sem erro, mas perde a segurança
 
-// void - ausencia de retorno (como void em C)
+// void - ausência de retorno (como void em C)
 function exibirMensagem(): void {
-  console.log("Ola!");
+  console.log("Olá!");
 }
 
 // null e undefined
@@ -208,23 +208,23 @@ let indefinido: undefined = undefined;
 
 ## 4. Operadores
 
-### 4.1 Operadores aritmeticos
+### 4.1 Operadores aritméticos
 
 ```typescript
 const a: number = 10;
 const b: number = 3;
 
 console.log(a + b);   // 13   (soma)
-console.log(a - b);   // 7    (subtracao)
-console.log(a * b);   // 30   (multiplicacao)
-console.log(a / b);   // 3.33 (divisao - sempre decimal!)
-console.log(a % b);   // 1    (resto da divisao / modulo)
-console.log(a ** b);  // 1000 (exponenciacao: 10^3)
+console.log(a - b);   // 7    (subtração)
+console.log(a * b);   // 30   (multiplicação)
+console.log(a / b);   // 3.33 (divisão - sempre decimal!)
+console.log(a % b);   // 1    (resto da divisão / módulo)
+console.log(a ** b);  // 1000 (exponenciação: 10^3)
 ```
 
-> **Diferenca do C:** Em C, `10 / 3` resulta em `3` (divisao inteira). Em TypeScript, `10 / 3` resulta em `3.3333...`. Para obter divisao inteira, use `Math.floor(10 / 3)`.
+> **Diferença do C:** Em C, `10 / 3` resulta em `3` (divisão inteira). Em TypeScript, `10 / 3` resulta em `3.3333...`. Para obter divisão inteira, use `Math.floor(10 / 3)`.
 
-### 4.2 Operadores de atribuicao
+### 4.2 Operadores de atribuição
 
 ```typescript
 let x: number = 10;
@@ -241,7 +241,7 @@ i++;       // i = 1
 i--;       // i = 0
 ```
 
-### 4.3 Operadores de comparacao
+### 4.3 Operadores de comparação
 
 ```typescript
 const x: number = 10;
@@ -252,39 +252,39 @@ console.log(x < y);    // true
 console.log(x >= 10);  // true
 console.log(x <= 9);   // false
 console.log(x === 10); // true  (igualdade estrita)
-console.log(x !== y);  // true  (diferenca estrita)
+console.log(x !== y);  // true  (diferença estrita)
 ```
 
-> **IMPORTANTE:** Use sempre `===` e `!==` (igualdade estrita). Nunca use `==` e `!=` (igualdade frouxa), pois fazem conversao de tipo automatica e geram bugs:
+> **IMPORTANTE:** Use sempre `===` e `!==` (igualdade estrita). Nunca use `==` e `!=` (igualdade frouxa), pois fazem conversão de tipo automática e geram bugs:
 > ```typescript
 > // JavaScript/TypeScript
 > 0 == ""     // true  (WAT?!)
 > 0 === ""    // false (correto)
 > ```
 
-### 4.4 Operadores logicos
+### 4.4 Operadores lógicos
 
 ```typescript
 const a: boolean = true;
 const b: boolean = false;
 
-console.log(a && b);   // false (E logico - ambos precisam ser true)
-console.log(a || b);   // true  (OU logico - pelo menos um true)
-console.log(!a);        // false (negacao)
+console.log(a && b);   // false (E lógico - ambos precisam ser true)
+console.log(a || b);   // true  (OU lógico - pelo menos um true)
+console.log(!a);        // false (negação)
 ```
 
 | Operador | C | TypeScript |
 |----------|---|------------|
-| E logico | `&&` | `&&` |
-| OU logico | `\|\|` | `\|\|` |
-| Negacao | `!` | `!` |
+| E lógico | `&&` | `&&` |
+| OU lógico | `\|\|` | `\|\|` |
+| Negação | `!` | `!` |
 
-### 4.5 Operador ternario
+### 4.5 Operador ternário
 
 ```typescript
 const idade: number = 18;
 
-// Sintaxe: condicao ? valor_se_true : valor_se_false
+// Sintaxe: condição ? valor_se_true : valor_se_false
 const status: string = idade >= 18 ? "Maior de idade" : "Menor de idade";
 
 console.log(status);  // "Maior de idade"
@@ -294,26 +294,26 @@ Funciona exatamente como em C.
 
 ---
 
-## 5. Expressoes e Precedencia
+## 5. Expressões e Precedência
 
-### 5.1 Expressoes
+### 5.1 Expressões
 
-Uma **expressao** e qualquer trecho de codigo que produz um valor:
+Uma **expressão** é qualquer trecho de código que produz um valor:
 
 ```typescript
-// Expressoes aritmeticas
+// Expressões aritméticas
 const total: number = (10 + 5) * 2 - 3;  // 27
 
-// Expressoes com strings
-const saudacao: string = "Ola, " + "mundo!";
+// Expressões com strings
+const saudacao: string = "Olá, " + "mundo!";
 
-// Expressoes logicas
+// Expressões lógicas
 const podeVotar: boolean = idade >= 16 && idade < 70;
 ```
 
-### 5.2 Precedencia de operadores
+### 5.2 Precedência de operadores
 
-A ordem e similar ao C e a matematica:
+A ordem é similar ao C e à matemática:
 
 | Prioridade | Operadores |
 |-----------|------------|
@@ -327,19 +327,19 @@ A ordem e similar ao C e a matematica:
 | 8 | `\|\|` |
 | 9 (menor) | `=`, `+=`, `-=` |
 
-**Dica pratica:** Na duvida, use parenteses para deixar a intencao clara.
+**Dica prática:** Na dúvida, use parênteses para deixar a intenção clara.
 
 ```typescript
-// Sem parenteses - funciona mas e confuso
+// Sem parênteses - funciona mas é confuso
 const resultado = 2 + 3 * 4 > 10 && true;
 
-// Com parenteses - muito mais claro
+// Com parênteses - muito mais claro
 const resultado = ((2 + (3 * 4)) > 10) && true;
 ```
 
 ---
 
-## 6. Conversao de Tipos
+## 6. Conversão de Tipos
 
 ```typescript
 // String para Number
@@ -360,52 +360,52 @@ const vazio: boolean = Boolean("");              // false
 const cheio: boolean = Boolean("texto");         // true
 ```
 
-> **Comparando com C:** Em C voce usa `atoi()`, `atof()`, ou casting `(int)`. Em TypeScript, usa `Number()`, `parseInt()`, `parseFloat()`.
+> **Comparando com C:** Em C você usa `atoi()`, `atof()`, ou casting `(int)`. Em TypeScript, usa `Number()`, `parseInt()`, `parseFloat()`.
 
 ---
 
-## 7. Pratica com Git
+## 7. Prática com Git
 
-Ao terminar cada exercicio, pratique o fluxo Git:
+Ao terminar cada exercício, pratique o fluxo Git:
 
 ```bash
 git add src/exercicio1.ts
-git commit -m "Resolve exercicio 1: calculadora com tipos"
+git commit -m "Resolve exercício 1: calculadora com tipos"
 ```
 
-**Lembre-se:** Cada exercicio pode ser um commit separado. Isso treina o habito e cria um historico limpo.
+**Lembre-se:** Cada exercício pode ser um commit separado. Isso treina o hábito e cria um histórico limpo.
 
 ---
 
-## Exercicios Praticos
+## Exercícios Práticos
 
-### Exercicio 1 - Setup TypeScript
-1. Crie um projeto TypeScript seguindo a secao 2
-2. No `src/index.ts`, declare variaveis tipadas para: nome, idade, curso, media
+### Exercício 1 - Setup TypeScript
+1. Crie um projeto TypeScript seguindo a seção 2
+2. No `src/index.ts`, declare variáveis tipadas para: nome, idade, curso, média
 3. Exiba tudo formatado com template literals
 4. Compile e execute com `npm run dev`
 5. Commit: `"Configura projeto TypeScript e cria perfil tipado"`
 
-### Exercicio 2 - Calculadora tipada
+### Exercício 2 - Calculadora tipada
 Crie `src/calculadora.ts` que:
 1. Declare duas constantes `number`
-2. Calcule e exiba: soma, subtracao, multiplicacao, divisao, resto e potencia
-3. Use `Math.floor()` para exibir tambem a divisao inteira
-4. Formate a saida com 2 casas decimais usando `.toFixed(2)`
+2. Calcule e exiba: soma, subtração, multiplicação, divisão, resto e potência
+3. Use `Math.floor()` para exibir também a divisão inteira
+4. Formate a saída com 2 casas decimais usando `.toFixed(2)`
 
-### Exercicio 3 - Conversor de unidades
+### Exercício 3 - Conversor de unidades
 Crie `src/conversor.ts` que:
-1. Declare uma distancia em **quilometros** (const)
-2. Converta para: metros, centimetros, milhas e pes
-3. Exiba todas as conversoes formatadas
+1. Declare uma distância em **quilômetros** (const)
+2. Converta para: metros, centímetros, milhas e pés
+3. Exiba todas as conversões formatadas
 
-### Exercicio 4 - Expressoes logicas
+### Exercício 4 - Expressões lógicas
 Crie `src/expressoes.ts` que:
-1. Declare variaveis para: idade, temCNH, temMultas
-2. Crie expressoes logicas que determinem:
-   - Pode dirigir? (idade >= 18 E temCNH E NAO temMultas)
+1. Declare variáveis para: idade, temCNH, temMultas
+2. Crie expressões lógicas que determinem:
+   - Pode dirigir? (idade >= 18 E temCNH E NÃO temMultas)
    - Pode votar? (idade >= 16)
-   - E adolescente? (idade >= 12 E idade < 18)
+   - É adolescente? (idade >= 12 E idade < 18)
 3. Exiba os resultados
 
 ---
@@ -414,21 +414,21 @@ Crie `src/expressoes.ts` que:
 
 O Copilot funciona muito bem com TypeScript por conta da tipagem. Experimente:
 
-1. **Autocomplete de tipos:** Comece a digitar uma variavel e veja o Copilot sugerir o tipo correto
-2. **Documentacao inline:** Escreva um comentario e o Copilot gera o codigo:
+1. **Autocomplete de tipos:** Comece a digitar uma variável e veja o Copilot sugerir o tipo correto
+2. **Documentação inline:** Escreva um comentário e o Copilot gera o código:
    ```typescript
    // Converte quilometros para milhas (1 km = 0.621371 mi)
    // <Tab para aceitar a sugestao do Copilot>
    ```
 3. **Pergunte ao Copilot Chat:**
    - *"O que significa 'strict: true' no tsconfig.json?"*
-   - *"Qual a diferenca entre Number() e parseInt()?"*
+   - *"Qual a diferença entre Number() e parseInt()?"*
 
-> **Exercicio com IA:** Resolva o Exercicio 4 sozinho. Depois, peca ao Copilot Chat para revisar seu codigo e sugerir melhorias. Compare as abordagens.
+> **Exercício com IA:** Resolva o Exercício 4 sozinho. Depois, peça ao Copilot Chat para revisar seu código e sugerir melhorias. Compare as abordagens.
 
 ---
 
 ## Leitura Complementar
 
-- [TypeScript - Documentacao Oficial](https://www.typescriptlang.org/docs/)
+- [TypeScript - Documentação Oficial](https://www.typescriptlang.org/docs/)
 - [TypeScript for JavaScript Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
